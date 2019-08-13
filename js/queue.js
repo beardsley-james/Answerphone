@@ -3,7 +3,7 @@ var crisafulli = {
   type: "hvac",
   dispType: "ersOnly",
   svcQual: 7,
-  callFreq: 4
+  frequency: 4
 }
 
 var messages = {
@@ -33,6 +33,10 @@ var dailyFreq = {
   }
 }
 
+let Answerphone = {
+  clients: [crisafulli]
+}
+
 var callGen = function(company){
   this.name = names[Math.floor(Math.random()*names.length)];
   this.client = company.name;
@@ -40,20 +44,20 @@ var callGen = function(company){
   this.message = messages[company.type][Math.floor(Math.random()*messages[company.type].length)];
 }
 
-var buildFreqMap = function(freqChart){
-  let freqMap = [];
-  let minute = 0;
-  for (let stamp in freqChart){
-    while (minute < stamp+1){
-      console.log(stamp.value);
-      freqMap.push(stamp.value)
+let dayGen = function(day, ansSvc, holiday){
+  let callFreq = 0;
+  let minutesInDay = 1440;
+  let currentMinute = 0;
+  while (currentMinute < minutesInDay) {
+    if (dailyFreq[day].hasOwnProperty(currentMinute)){
+      callFreq = dailyFreq[day][currentMinute];
+      console.log("Change Frequency to " + callFreq + " at " + currentMinute)
     }
+    ansSvc.clients.forEach(function(client){
+      if (client.frequency < callFreq) {
+        console.log(new callGen(client) + " " + currentMinute)
+      }
+    })
+    currentMinute++
   }
-  return freqMap
 }
-
-call1 = new callGen(crisafulli);
-
-console.log(call1)
-
-console.log(buildFreqMap(dailyFreq.monday))
