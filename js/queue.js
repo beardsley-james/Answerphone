@@ -17,8 +17,6 @@ var messages = {
   ]
 }
 
-var names = ["Benny", "June", "Lawrence", "Tyler"]
-
 var dailyFreq = {
   monday: {
     "0": 2,
@@ -38,26 +36,8 @@ let Answerphone = {
 }
 
 var callGen = function(company){
-  this.name = names[Math.floor(Math.random()*names.length)];
-  this.client = company.name;
+  this.name = generateFullName();
+  this.client = generateBusinessName("hvac");
   this.type = company.type;
   this.message = messages[company.type][Math.floor(Math.random()*messages[company.type].length)];
-}
-
-let dayGen = function(day, ansSvc, holiday){
-  let callFreq = 0;
-  let minutesInDay = 1440;
-  let currentMinute = 0;
-  while (currentMinute < minutesInDay) {
-    if (dailyFreq[day].hasOwnProperty(currentMinute)){
-      callFreq = dailyFreq[day][currentMinute];
-      console.log("Change Frequency to " + callFreq + " at " + currentMinute)
-    }
-    ansSvc.clients.forEach(function(client){
-      if (client.frequency < callFreq) {
-        console.log(new callGen(client) + " " + currentMinute)
-      }
-    })
-    currentMinute++
-  }
 }
