@@ -13,7 +13,7 @@ window.setInterval(function(){
     console.log("Change Frequency to " + callFreq + " at " + currentMinute)
   }
   ansSvc.clients.forEach(function(client){
-    if (client.frequency < callFreq) {
+    if (client.frequency <= callFreq) {
       let call = new callGen(client);
       let callCard = document.createElement("p");
       callCard.innerHTML = "<b>" + call.name + "</b> </br>" + call.message + "</br> <i>" + call.client + "</i>";
