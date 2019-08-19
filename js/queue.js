@@ -7,5 +7,9 @@ var crisafulli = {
 }
 
 let Answerphone = {
-  clients: [crisafulli]
+  clients: []
+}
+
+for (i = 0; i < 3; i++){
+  Answerphone.clients.push(new clientGenerator(3))
 }

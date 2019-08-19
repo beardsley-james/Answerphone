@@ -71,7 +71,17 @@ var names = {
     "Sly",
     "Trevor",
     "Morgan",
-    "Richard"
+    "Richard",
+    "Ingrid",
+    "Kay",
+    "Wayne",
+    "Alex",
+    "Anthony",
+    "Dara",
+    "Yvonne",
+    "Sheila",
+    "Diane",
+    "Rip"
   ],
   last: [
     "Taylor",
@@ -96,7 +106,17 @@ var names = {
     "McGuiness",
     "O'Sullivan",
     "Martinez",
-    "Parnassus"
+    "Parnassus",
+    "Florence",
+    "VanNostrand",
+    "Gotobed",
+    "Romero",
+    "Coka",
+    "Hodges",
+    "McKinney",
+    "Syke",
+    "Saperstein",
+    "Matos"
   ]
 }
 
@@ -104,8 +124,8 @@ var businessTypes = ["hvac", "doctor", "lawyer"]
 
 var callFreqRanges = {
   hvac: [3, 7],
-  doctor: [2, 9],
-  lawyer: [6, 10]
+  doctor: [2, 8],
+  lawyer: [6, 9]
 }
 
 var dailyFreq = {

@@ -45,7 +45,11 @@ var callCheck = function(frequency){
 
 var callGen = function(company){
   this.name = generateFullName();
-  this.client = new clientGenerator(5);
+  this.client = company.name;
   this.type = company.type;
   this.message = messages[company.type][Math.floor(Math.random()*messages[company.type].length)];
+}
+
+var randomPercent = function(){
+  return Math.floor(Math.random() * 100) + 1
 }
