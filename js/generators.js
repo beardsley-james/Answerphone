@@ -20,9 +20,9 @@ var clientGenerator = function(difficulty){
   this.type = type;
   this.name = generateBusinessName(type);
   this.frequency = returnNumberInRange(callFreqRanges[type][0], callFreqRanges[type][1]);
-  this.callVolume = (difficulty * 5) + Math.floor(Math.random() * 50);
+  this.callVolume = (difficulty * 5) + (Math.floor(Math.random() * 50));
   this.opLevel = determineOpLevel(difficulty);
-  this.svcQual = Math.floor(Math.random() * 10) + 1
+  this.svcQual = Math.floor(Math.random() * 5) + 1
 }
 
 var returnNumberInRange = function(min, max){
@@ -48,8 +48,52 @@ var callGen = function(company){
   this.client = company.name;
   this.type = company.type;
   this.message = messages[company.type][Math.floor(Math.random()*messages[company.type].length)];
+  this.difficulty = company.opLevel + company.svcQual;
+  this.timeRinging = 0;
+  this.timeOnHold = 0;
+  this.callTime = 0;
+  this.dispatchTime = 0;
+  this.custSatisfaction = 0
 }
 
 var randomPercent = function(){
   return Math.floor(Math.random() * 100) + 1
+}
+
+var minToMilTime = function(minutes){
+  return Math.floor(minutes/60) + "" + (minutes%60)
+}
+
+var minToStandardTime = function(minutes){
+  let hours = Math.floor(minutes/60);
+  let pm = 0;
+  if (hours > 12){
+    pm = 1;
+    hours = hours - 12
+  }
+  let mins = (minutes%60);
+  if (mins < 10) {
+    mins = "0" + mins
+  }
+  let timeString = hours + ":" + mins;
+  if (pm) {
+    timeString += "pm"
+  } else {
+    timeString += "am"
+  }
+  return timeString
+}
+
+var opGenerator = function(){
+  this.name = initialsGenerator();
+  this.level = 1;
+  this.onCall = 0;
+  this.idleTime = 0;
+  this.focus = 5;
+  this.personability = 5;
+  this.call = []
+}
+
+var initialsGenerator = function(){
+  return "AAA"
 }

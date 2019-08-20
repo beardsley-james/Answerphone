@@ -6,10 +6,18 @@ var crisafulli = {
   frequency: 4
 }
 
-let Answerphone = {
-  clients: []
+let clients = [];
+let ops = [];
+let callQueue = {
+  live: [],
+  holding: [],
+  completed: []
 }
 
 for (i = 0; i < 3; i++){
-  Answerphone.clients.push(new clientGenerator(3))
+  clients.push(new clientGenerator(3))
+}
+
+for (i = 0; i < 3; i++){
+  ops.push(new opGenerator())
 }

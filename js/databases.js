@@ -81,7 +81,9 @@ var names = {
     "Yvonne",
     "Sheila",
     "Diane",
-    "Rip"
+    "Rip",
+    "Janina",
+    "Carolyn"
   ],
   last: [
     "Taylor",
@@ -116,7 +118,9 @@ var names = {
     "McKinney",
     "Syke",
     "Saperstein",
-    "Matos"
+    "Matos",
+    "Kowalik",
+    "Bloomquist"
   ]
 }
 
