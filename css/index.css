@@ -1,0 +1,45 @@
+div{
+  margin: 1%;
+  height: 200%
+}
+
+#liveCalls{
+  width: 20%;
+  border: 1px black solid;
+  background-color: blue;
+  float: left
+}
+
+#holdingCalls{
+  width: 20%;
+  border: 1px black solid;
+  background-color: red;
+  float: left
+}
+
+#opPool{
+  width: 50%;
+  border: 1px black solid;
+  float: left
+}
+
+.call{
+  background-color: black;
+  color: green;
+  padding: 1%;
+  margin: 2%
+}
+
+.op{
+  border: 1px black solid;
+  padding: 1%;
+  margin: 2%;
+  width: 40%;
+  float: left
+}
+
+.active{
+  background-color: green
+}
+
+.inactive{}
