@@ -30,7 +30,10 @@ var businessNames = {
   hvac: [
     {fix: "suf", text: " Brothers Plumbing & Heating"},
     {fix: "pre", text: "HVAC by "},
-    {fix: "suf", text: " Heating & Air Conditioning"}
+    {fix: "suf", text: " Heating & Air Conditioning"},
+    {fix: "suf", text: " Comfort Systems"},
+    {fix: "pre", text: "AC & Heating by "},
+    {fix: "suf", text: " AC Services"}
   ],
   doctor: [
     {fix: "pre", text: "The Office of Dr "},

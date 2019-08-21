@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <body>
-  <div id="callQueue">
-    <div id="liveCalls" class="queue">
-    </div>
-    <div id="holdingCalls" class="queue">
-    </div>
-    <div id="opPool">
-    </div>
-  </div>
+  <div id="testBox"></div>
   <script type="text/javascript" src="./js/databases.js"></script>
   <script type="text/javascript" src="./js/generators.js"></script>
   <script type="text/javascript" src="./js/queue.js"></script>
   <script type="text/javascript" src="./js/render.js"></script>
-  <script type="text/javascript" src="./js/core.js"></script>
+  <script>
+    var company = new clientGenerator(3);
+    var call = new callGen(company);
+    var box = document.getElementById("testBox");
+    box.appendChild(callRender(call))
+  </script>
 </body>
