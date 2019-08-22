@@ -1,4 +1,4 @@
-let msPerMin = 5000,
+let msPerMin = 100,
 callFreq = 0,
 minutesInDay = 1440,
 currentMinute = 420,
@@ -24,7 +24,8 @@ var phoneRinger = function(client){
   if (client.frequency <= callFreq && client.callVolume >= randomPercent()) {
     let call = new callGen(client);
     callQueue.live.push(call);
-    console.log(new callGen(client) + " " + currentMinute)
+    console.log(new callGen(client) + " " + currentMinute);
+    document.getElementById("liveCalls").prepend(callRender(call))
   }
 }
 
@@ -62,7 +63,16 @@ var callChecker = function(op){
 
 var callGrabber = function(target, destination){
   let call = target.pop();
-  destination.push(call)
+  destination.push(call);
+  if (target == callQueue.live || target == callQueue.holding){
+    if (document.getElementById("call" + call.callNumber)){
+      removeCall(call)
+    }
+  }
+  if (destination == callQueue.holding){
+    let holdingQueue = document.getElementById("holdingCalls");
+    holdingQueue.prepend(callRender(call))
+  }
 }
 
 var checkIfCallCompleted = function(op, call){
@@ -80,4 +90,10 @@ var callQueueAdvance = function(){
   callQueue.live.forEach(function(call){
     call.timeRinging++
   })
+}
+
+var extractCallNumber = function(elementId){
+  let callRegEx = /call(\d+)/;
+  let callNum = callRegEx.exec(elementId);
+  return callNum[1]
 }

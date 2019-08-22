@@ -43,6 +43,8 @@ var callCheck = function(frequency){
   }
 }
 
+var callNumber = 0;
+
 var callGen = function(company){
   this.name = generateFullName();
   this.client = company.name;
@@ -53,7 +55,9 @@ var callGen = function(company){
   this.timeOnHold = 0;
   this.callTime = 0;
   this.dispatchTime = 0;
-  this.custSatisfaction = 0
+  this.custSatisfaction = 0;
+  this.callNumber = callNumber;
+  callNumber++
 }
 
 var randomPercent = function(){
