@@ -11,7 +11,8 @@ let ops = [];
 let callQueue = {
   live: [],
   holding: [],
-  completed: []
+  completed: [],
+  lost: []
 }
 
 for (i = 0; i < 3; i++){

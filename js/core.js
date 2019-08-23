@@ -1,7 +1,7 @@
-let msPerMin = 100,
+let msPerMin = 500,
 callFreq = 0,
 minutesInDay = 1440,
-currentMinute = 420,
+currentMinute = 1080,
 day = "monday";
 
 window.setInterval(function(){
@@ -30,34 +30,34 @@ var phoneRinger = function(client){
 }
 
 var callChecker = function(op){
-  if (op.onCall) {
-    if (op.call.length > 0 && callQueue.live.length > 0 && op.call[0].timeOnHold == 0){
+  if (op.call.length > 0){
+    if (op.call[0].timeOnHold == 0 && op.call[0].callTime == 0 && callQueue.live.length > 0){
       callGrabber(op.call, callQueue.holding);
-      op.onCall = 0
-      console.log("Call was put on hold")
+      console.log(op.name + " put a caller on hold")
+    } else if (op.call[0].timeToComplete > 0){
+      console.log(op.name + " is working on a message, TTC " + op.call[0].timeToComplete);
+      op.call[0].timeToComplete--;
+      console.log("Time left:" + op.call[0].timeToComplete)
+    } else if (op.call[0].timeToComplete == 0) {
+      delete op.call[0].timeToComplete;
+      callGrabber(op.call, callQueue.completed);
+      console.log(op.name + " has completed a call")
     } else {
       op.call[0].callTime++;
       checkIfCallCompleted(op, op.call[0])
-      console.log("Call is in progress")
+      console.log(op.name + " is speaking with a caller")
     }
-  } else if (op.call.length > 0 && op.call[0].timeToComplete > 0) {
-    op.call[0].timeToComplete--
-    console.log("Op is working on a call")
-  } else if (op.call.length > 0 && op.call[0].timeToComplete == 0) {
-    delete op.call[0].timeToComplete;
-    callGrabber(op.call, callQueue.completed);
-    op.onCall = 0
-    console.log("Op has completed a call")
-  } else if (callQueue.live.length > 0) {
-    callGrabber(callQueue.live, op.call);
-    op.onCall = 1
-    console.log("Op answered a live call")
-  } else if (callQueue.holding.length > 0) {
-    callGrabber(callQueue.holding, op.call);
-    op.onCall = 1
-    console.log("Op answered a holding call")
-  } else {op.idleTime++
-    console.log("Op is idle")
+  } else {
+    if (callQueue.live.length > 0){
+      callGrabber(callQueue.live, op.call);
+      console.log(op.name + " answered a live call")
+    } else if (callQueue.holding.length > 0){
+      callGrabber(callQueue.holding, op.call);
+      console.log(op.name + " answered a holding call")
+    } else {
+      op.idleTime++;
+      console.log(op.name + " is in standby")
+    }
   }
 }
 
@@ -73,22 +73,38 @@ var callGrabber = function(target, destination){
     let holdingQueue = document.getElementById("holdingCalls");
     holdingQueue.prepend(callRender(call))
   }
+  if (destination == callQueue.lost){
+    if (document.getElementById("call" + call.callNumber)){
+      removeCall(call)
+    }
+  }
 }
 
 var checkIfCallCompleted = function(op, call){
   let skill = op.level + Math.floor(Math.random() * 5);
   let difficulty = call.difficulty;
+  console.log("Skill test, " + skill + " vs " + difficulty)
   if (skill >= difficulty){
+    console.log("Test successful")
     call.timeToComplete = Math.floor(Math.random() * 3)
+    console.log("Time to complete: " + call.timeToComplete)
   }
 }
 
 var callQueueAdvance = function(){
   callQueue.holding.forEach(function(call){
-    call.timeOnHold++
+    call.timeOnHold++;
+    if (call.timeOnHold++ > 5) {
+      callGrabber(callQueue.holding, callQueue.lost);
+      console.log("Caller disconnected while on hold")
+    }
   })
   callQueue.live.forEach(function(call){
-    call.timeRinging++
+    call.timeRinging++;
+    if (call.timeRinging > 3) {
+      callGrabber(callQueue.live, callQueue.lost);
+      console.log("Call rang out")
+    }
   })
 }
 
