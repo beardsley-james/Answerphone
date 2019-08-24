@@ -94,3 +94,7 @@ In my continued quest to avoid actually dealing with the problems my operators a
 8/23/19
 
 I got the queue to work! The problem was that I was using an op property (.onCall) instead of just using (op.call.length > 0) which just checks whether or not there's a call object in the array. So now I have my ops pulling calls off of queue, sticking with them if they've been on hold already, working the holding calls, and then finishing the calls and moving them into the completed folder. I also have a lost calls category now for calls ringing out when people get bored, though I should set that to a variable since that's one of the things that could be used to make an area more challenging than other another city where people are perhaps more patient. It looks pretty good and it works fine. I need to set up the rendering of the op object so I can show when they're on a call or whatever and I need to implement an "onclick" function for the calls in the DOM so that I can start getting the clicker functionality going. I also need an end of day routine and I need to switch from setInterval to setTimer with a callback function.
+
+8/24/19
+
+OpCard are displayed and it shows their current activity in a barebones way but they're still throwing calls on hold too easily and not sticking with calls they take out of the holding queue so that's something to figure out. Display looks nice though and I also implemented a randomized initial generator that uses recursion to make sure it's unique.

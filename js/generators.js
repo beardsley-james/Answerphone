@@ -98,5 +98,20 @@ var opGenerator = function(){
 }
 
 var initialsGenerator = function(){
-  return "AAA"
+  let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  let initials = "";
+  while (initials.length < 3) {
+    initials += alphabet[Math.floor(Math.random() * alphabet.length)]
+  }
+  if (initialsChecker){
+    return initials
+  } else {initials = initialsGenerator()}
+}
+
+var initialsChecker = function(initials){
+  ops.forEach(function(op){
+    if (op.name == initials){
+      return false
+    } else {return true}
+  })
 }

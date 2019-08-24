@@ -30,3 +30,32 @@ var removeCall = function(call){
   let callTicket = document.getElementById(callId);
   callTicket.parentNode.removeChild(callTicket)
 }
+
+var opUpdater = function(op){
+  let status = document.getElementById("status" + op.name);
+  let opCard = document.getElementById("op" + op.name);
+  if (op.call.length > 0) {
+    status.innerHTML = op.call[0].name + ", " + op.call[0].client;
+    opCard.setAttribute("class", "op active")
+  } else {
+    status.innerHTML = "Standby";
+    opCard.setAttribute("class", "op inactive")
+  }
+}
+
+var opStartup = function(ops){
+  let opCool = document.getElementById("opPool");
+  ops.forEach(function(op){
+    let opCard = document.createElement("div");
+    opCard.setAttribute("class", "op");
+    opCard.setAttribute("id", "op" + op.name);
+    let name = document.createElement("b");
+    name.innerHTML = op.level + " " + op.name;
+    let status = document.createElement("span");
+    status.setAttribute("id", "status" + op.name);
+    opCard.appendChild(name);
+    opCard.appendChild(lineBreak());
+    opCard.appendChild(status);
+    opPool.appendChild(opCard)
+  })
+}

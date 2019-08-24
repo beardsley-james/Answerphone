@@ -1,8 +1,7 @@
 * RegEx business names so that I can just stick the name wherever. I could also just set a return string and make it way simpler
 * setTimer instead of setInterval
-* Display operator activity
 * End of day report
 * Acquisition of operators
-* Randomize operator initials
 * Client acquisition
 * Jiggle number values to make it actually fun
+* Figure out why they're not sticking with calls to completion

@@ -1,8 +1,10 @@
-let msPerMin = 500,
+let msPerMin = 5000,
 callFreq = 0,
 minutesInDay = 1440,
 currentMinute = 1080,
 day = "monday";
+
+opStartup(ops);
 
 window.setInterval(function(){
   console.log("Tick " + currentMinute);
@@ -59,6 +61,7 @@ var callChecker = function(op){
       console.log(op.name + " is in standby")
     }
   }
+  opUpdater(op)
 }
 
 var callGrabber = function(target, destination){
