@@ -35,7 +35,9 @@ var callChecker = function(op){
   if (op.call.length > 0){
     if (op.call[0].timeOnHold == 0 && op.call[0].callTime == 0 && callQueue.live.length > 0){
       callGrabber(op.call, callQueue.holding);
-      console.log(op.name + " put a caller on hold")
+      console.log(op.name + " put a caller on hold");
+      callGrabber(callQueue.live, op.call);
+      console.log(op.name + " picked up a live call")
     } else if (op.call[0].timeToComplete > 0){
       console.log(op.name + " is working on a message, TTC " + op.call[0].timeToComplete);
       op.call[0].timeToComplete--;
