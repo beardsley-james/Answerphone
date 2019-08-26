@@ -99,17 +99,17 @@ var checkIfCallCompleted = function(op, call){
 var callQueueAdvance = function(){
   callQueue.holding.forEach(function(call){
     call.timeOnHold++;
-    if (call.timeOnHold++ > 5) {
+    if (call.timeOnHold > 5) {
       callGrabber(callQueue.holding, callQueue.lost);
       console.log("Caller disconnected while on hold")
-    }
+    } else {callRefresh(call)}
   })
   callQueue.live.forEach(function(call){
     call.timeRinging++;
     if (call.timeRinging > 3) {
       callGrabber(callQueue.live, callQueue.lost);
       console.log("Call rang out")
-    }
+    } else {callRefresh(call)}
   })
 }
 

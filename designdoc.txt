@@ -98,3 +98,7 @@ I got the queue to work! The problem was that I was using an op property (.onCal
 8/24/19
 
 OpCard are displayed and it shows their current activity in a barebones way but they're still throwing calls on hold too easily and not sticking with calls they take out of the holding queue so that's something to figure out. Display looks nice though and I also implemented a randomized initial generator that uses recursion to make sure it's unique.
+
+8/26/19
+
+Another little thing. I made a function to refresh the stat line on the calls. I don't think the stat line is nearly finalized at this point but it's what I'm working with for now. I think I need to buckle down and really hash out the setTimeout function this weekend; once that's done I can start building infrastructure over the basic gameplay I think. I also still have to make the onClick function which is going to be critical to making it more than a weird toy.

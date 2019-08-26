@@ -9,6 +9,7 @@ var callRender = function(call){
   let business = document.createElement("i");
   business.innerHTML = call.client;
   let times = document.createElement("span");
+  times.setAttribute("id", "call" + call.callNumber + "stats");
   times.innerHTML = "Live:" + call.timeRinging + " Hold:" + call.timeOnHold + " Answer:" + call.callTime + " #:" + call.callNumber;
   callTicket.appendChild(name);
   callTicket.appendChild(lineBreak());
@@ -18,6 +19,11 @@ var callRender = function(call){
   callTicket.appendChild(lineBreak());
   callTicket.appendChild(times);
   return callTicket
+}
+
+var callRefresh = function(call){
+  let callStats = document.getElementById("call" + call.callNumber + "stats");
+  callStats.innerHTML = "Live:" + call.timeRinging + " Hold:" + call.timeOnHold + " Answer:" + call.callTime + " #:" + call.callNumber;
 }
 
 var lineBreak = function(){
