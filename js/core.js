@@ -1,4 +1,4 @@
-let msPerMin = 5000,
+let msPerMin = 500,
 callFreq = 0,
 minutesInDay = 1440,
 currentMinute = 1080,
@@ -117,4 +117,29 @@ var extractCallNumber = function(elementId){
   let callRegEx = /call(\d+)/;
   let callNum = callRegEx.exec(elementId);
   return callNum[1]
+}
+
+var manualAnswer = function(event){
+  let target = event.target;
+  let callId = extractCallNumber(target.id);
+  let category = target.parentNode.id;
+  var callObj = {};
+  if (category == "holdingCalls"){
+    category = "holding"
+  } else {category = "live"}
+  callQueue[category].forEach(function(call, index){
+    if (call.callNumber == callId) {
+      callObj = call;
+      callQueue[category].splice(index, 1)
+    }
+  })
+  if (category == "holding"){
+    callQueue.completed.push(callObj);
+    removeCall(callObj)
+  } else {
+    callQueue.holding.push(callObj);
+    removeCall(callObj);
+    let holdingQueue = document.getElementById("holdingCalls");
+    holdingQueue.prepend(callRender(callObj))
+  }
 }

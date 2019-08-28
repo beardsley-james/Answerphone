@@ -102,3 +102,11 @@ OpCard are displayed and it shows their current activity in a barebones way but 
 8/26/19
 
 Another little thing. I made a function to refresh the stat line on the calls. I don't think the stat line is nearly finalized at this point but it's what I'm working with for now. I think I need to buckle down and really hash out the setTimeout function this weekend; once that's done I can start building infrastructure over the basic gameplay I think. I also still have to make the onClick function which is going to be critical to making it more than a weird toy.
+
+8/28/19
+
+Got the click handler set up pretty good right now. You can click a live call to put it into the holding queue or click a holding call to complete it. When you click the stat line it kind of fucks everything up because the statline parent element is the call box instead of the category box so it doesn't help much, and you have to click the constantly moving bottom of the queue to answer the oldest calls so what I want to do is reverse the order so the oldest calls are on top and new calls get added to the bottom (not in the game logic, though, just in the view). I think this should work fine even if it stays youngest-oldest in the holdQueue object but maybe I should reverse the order in there too.
+
+It all looks real jumpy though and maybe there's something I could do to make it seem smoother. Just a little fade out maybe for the calls instead of having them disappear instantly, like a .5 or .75 move or something. But that might fuck around with the actual timer for the game so I have to be careful with it.
+
+It was throwing me some error messages because I figured out how to get it to work in the view before I got it to work in the model. No good. Fixed it up a bit and ended up using splice anyway even though I think my initial solution was fine, the problem was I was looking for call.callId instead of call.callNumber, only one of which actually exists.

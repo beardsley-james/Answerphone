@@ -5,3 +5,7 @@
 * Client acquisition
 * Jiggle number values to make it actually fun
 * Figure out why they're not sticking with calls to completion
+* Fix the event handler so that the stat line doesn't fuck it up (get rid of the stat line?)
+* Maybe some kind of animation so it doesn't look so jumpy
+* Why do the stupid op boxes flop around all over the place? Maybe fix that took
+* Get some more names

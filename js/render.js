@@ -2,6 +2,7 @@ var callRender = function(call){
   let callTicket = document.createElement("div");
   callTicket.setAttribute("id", ("call" + call.callNumber))
   callTicket.setAttribute("class", "call");
+  callTicket.setAttribute("onclick", "manualAnswer(event)")
   let name = document.createElement("b");
   name.innerHTML = call.name;
   let message = document.createElement("span");
