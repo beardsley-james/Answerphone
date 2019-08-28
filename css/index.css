@@ -6,8 +6,12 @@ div{
 #liveCalls{
   width: 20%;
   border: 1px black solid;
-  background-color: blue;
+  background-color: CornflowerBlue;
   float: left
+}
+
+#numLive{
+  background-color: CornflowerBlue
 }
 
 #holdingCalls{
@@ -15,6 +19,23 @@ div{
   border: 1px black solid;
   background-color: red;
   float: left
+}
+
+#numHolding{
+  background-color: red
+}
+
+#numCompleted{
+  background-color: black;
+  color: white
+}
+
+#numLost{
+  background-color: DarkOrange;
+}
+
+.callStatBox{
+  padding: 0.5%
 }
 
 #opPool{
@@ -25,7 +46,7 @@ div{
 
 .call{
   background-color: black;
-  color: green;
+  color: Chartreuse;
   padding: 1%;
   margin: 2%
 }

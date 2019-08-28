@@ -27,6 +27,17 @@ var callRefresh = function(call){
   callStats.innerHTML = "Live:" + call.timeRinging + " Hold:" + call.timeOnHold + " Answer:" + call.callTime + " #:" + call.callNumber;
 }
 
+var callStatBoxRefresh = function(){
+  let numHolding = document.getElementById("numHolding");
+  let numLive = document.getElementById("numLive");
+  let numCompleted = document.getElementById("numCompleted");
+  let numLost = document.getElementById("numLost");
+  numHolding.innerHTML = callQueue.holding.length;
+  numLive.innerHTML = callQueue.live.length;
+  numCompleted.innerHTML = callQueue.completed.length;
+  numLost.innerHTML = callQueue.lost.length
+}
+
 var lineBreak = function(){
   let br = document.createElement("br");
   return br
@@ -65,4 +76,9 @@ var opStartup = function(ops){
     opCard.appendChild(status);
     opPool.appendChild(opCard)
   })
+}
+
+var updateCurrentMinute = function(){
+  let minuteDisplay = document.getElementById("currentMinute");
+  minuteDisplay.innerHTML = currentMinute
 }

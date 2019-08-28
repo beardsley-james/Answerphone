@@ -4,7 +4,22 @@
 </head>
 
 <body>
-  <div id="callQueue">
+
+  <div id="controlPanel">
+    <span id = "currentMinute"></span>
+    <button onclick="msPerMin = 500">0.5</button>
+    <button onclick="msPerMin = 1000">1</button>
+    <button onclick="msPerMin = 5000">5</button>
+    <span id="callStats">
+      <span id="numLive" class="callStatBox">0</span>
+      <span id="numHolding" class="callStatBox">0</span>
+      <span id="numCompleted" class="callStatBox">0</span>
+      <span id="numLost" class="callStatBox">0</span>
+    </span>
+
+  </div>
+
+  <div id="callQueue" class="panel">
     <div id="liveCalls" class="queue">
       <h1>Live Calls</h1>
     </div>
@@ -14,6 +29,13 @@
     <div id="opPool">
     </div>
   </div>
+
+  <div id="humanResources" class="panel">
+  </div>
+
+  <div id="financial" class="panel">
+  </div>
+
   <script type="text/javascript" src="./js/databases.js"></script>
   <script type="text/javascript" src="./js/generators.js"></script>
   <script type="text/javascript" src="./js/queue.js"></script>

@@ -15,10 +15,10 @@ let callQueue = {
   lost: []
 }
 
-for (i = 0; i < 15; i++){
+for (i = 0; i < 5; i++){
   clients.push(new clientGenerator(3))
 }
 
-for (i = 0; i < 15; i++){
+for (i = 0; i < 3; i++){
   ops.push(new opGenerator())
 }
