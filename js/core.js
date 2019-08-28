@@ -1,12 +1,12 @@
-let msPerMin = 500,
+let msPerMin = 50,
 callFreq = 0,
 minutesInDay = 1440,
-currentMinute = 1080,
+currentMinute = 0,
 day = "monday";
 
 opStartup(ops);
 
-window.setInterval(function(){
+/* window.setTimeout(function(){
   console.log("Tick " + currentMinute);
   if (dailyFreq[day].hasOwnProperty(currentMinute)){
     callFreq = dailyFreq[day][currentMinute];
@@ -18,17 +18,38 @@ window.setInterval(function(){
   currentMinute++;
   if (currentMinute == minutesInDay){
     currentMinute = 0;
-    callFreq = 0
+    callFreq = 0;
   }
-}, msPerMin)
+}, msPerMin) */
 
 var phoneRinger = function(client){
   if (client.frequency <= callFreq && client.callVolume >= randomPercent()) {
     let call = new callGen(client);
     callQueue.live.push(call);
     console.log(new callGen(client) + " " + currentMinute);
-    document.getElementById("liveCalls").prepend(callRender(call))
+    document.getElementById("liveCalls").append(callRender(call))
   }
+}
+
+var timer = function(){
+  setTimeout(function(){
+    console.log("Tick " + currentMinute);
+    if (dailyFreq[day].hasOwnProperty(currentMinute)){
+      callFreq = dailyFreq[day][currentMinute];
+      console.log("Change Frequency to " + callFreq + " at " + currentMinute)
+    }
+    clients.forEach(phoneRinger);
+    ops.forEach(callChecker);
+    callQueueAdvance();
+    callStatBoxRefresh();
+    updateCurrentMinute();
+    currentMinute++;
+    if (currentMinute == minutesInDay){
+      currentMinute = 0;
+      callFreq = 0;
+      timer()
+    } else { timer() }
+  }, msPerMin)
 }
 
 var callChecker = function(op){
@@ -76,7 +97,7 @@ var callGrabber = function(target, destination){
   }
   if (destination == callQueue.holding){
     let holdingQueue = document.getElementById("holdingCalls");
-    holdingQueue.prepend(callRender(call))
+    holdingQueue.append(callRender(call))
   }
   if (destination == callQueue.lost){
     if (document.getElementById("call" + call.callNumber)){
@@ -140,6 +161,9 @@ var manualAnswer = function(event){
     callQueue.holding.push(callObj);
     removeCall(callObj);
     let holdingQueue = document.getElementById("holdingCalls");
-    holdingQueue.prepend(callRender(callObj))
+    holdingQueue.append(callRender(callObj))
   }
+  callStatBoxRefresh()
 }
+
+timer()
