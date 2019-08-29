@@ -82,3 +82,52 @@ var updateCurrentMinute = function(){
   let minuteDisplay = document.getElementById("currentMinute");
   minuteDisplay.innerHTML = currentMinute
 }
+
+var renderEndOfDay = function(report){
+  document.getElementById("tableCallsCompleted").innerHTML = report.completedCalls;
+  document.getElementById("tableCallsLost").innerHTML = report.lostCalls;
+  document.getElementById("tableTotalTimeRinging").innerHTML = report.totalTimeRinging;
+  document.getElementById("tableTotalHoldTime").innerHTML = report.totalTimeOnHold;
+  document.getElementById("tableTotalCallTime").innerHTML = report.totalCallTime;
+  document.getElementById("tableAmountEarned").innerHTML = report.amountEarned;
+  report.ops.forEach(function(op){
+    let opReport = document.createElement("div");
+    opReport.setAttribute("class", "opReport");
+    let name = document.createElement("span");
+    name.innerHTML = "Name: " + op.name;
+    let callsCompleted = document.createElement("span")
+    callsCompleted.innerHTML = "Calls Completed: " + op.callsCompleted;
+    let idleTime = document.createElement("span")
+    idleTime.innerHTML = "Standby Time: " + op.idleTime;
+    opReport.appendChild(name);
+    opReport.appendChild(lineBreak());
+    opReport.appendChild(callsCompleted);
+    opReport.appendChild(lineBreak());
+    opReport.appendChild(idleTime);
+    document.getElementById("operatorReport").appendChild(opReport)
+  })
+  report.clients.forEach(function(client){
+    let clientReport = document.createElement("div");
+    clientReport.setAttribute("class", "clientReport");
+    let name = document.createElement("span");
+    name.innerHTML = "Name: " + client.name;
+    let type = document.createElement("span");
+    type.innerHTML = "Type: " + client.type;
+    let level = document.createElement("span");
+    level.innerHTML = "Level " + client.opLevel + " Account";
+    let callRate = document.createElement("span");
+    callRate.innerHTML = "Rate Per Minute: $0." + client.callRate;
+    let callTime = document.createElement("span");
+    callTime.innerHTML = "Total Call Time: " + client.callTime;
+    clientReport.appendChild(name);
+    clientReport.appendChild(lineBreak());
+    clientReport.appendChild(type);
+    clientReport.appendChild(lineBreak());
+    clientReport.appendChild(level);
+    clientReport.appendChild(lineBreak());
+    clientReport.appendChild(callRate);
+    clientReport.appendChild(lineBreak());
+    clientReport.appendChild(callTime);
+    document.getElementById("clientReport").appendChild(clientReport)
+  })
+}

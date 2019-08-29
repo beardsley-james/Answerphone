@@ -22,7 +22,9 @@ var clientGenerator = function(difficulty){
   this.frequency = returnNumberInRange(callFreqRanges[type][0], callFreqRanges[type][1]);
   this.callVolume = (difficulty * 5) + (Math.floor(Math.random() * 50));
   this.opLevel = determineOpLevel(difficulty);
-  this.svcQual = Math.floor(Math.random() * 5) + 1
+  this.svcQual = Math.floor(Math.random() * 5) + 1;
+  this.callRate = Math.floor(Math.random() * (100-50)) + 50;
+  this.callTime = 0
 }
 
 var returnNumberInRange = function(min, max){
@@ -94,7 +96,8 @@ var opGenerator = function(){
   this.idleTime = 0;
   this.focus = 5;
   this.personability = 5;
-  this.call = []
+  this.call = [];
+  this.callsCompleted = 0
 }
 
 var initialsGenerator = function(){

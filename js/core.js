@@ -1,26 +1,10 @@
-let msPerMin = 50,
+let msPerMin = 1,
 callFreq = 0,
 minutesInDay = 1440,
 currentMinute = 0,
 day = "monday";
 
 opStartup(ops);
-
-/* window.setTimeout(function(){
-  console.log("Tick " + currentMinute);
-  if (dailyFreq[day].hasOwnProperty(currentMinute)){
-    callFreq = dailyFreq[day][currentMinute];
-    console.log("Change Frequency to " + callFreq + " at " + currentMinute)
-  }
-  clients.forEach(phoneRinger);
-  ops.forEach(callChecker);
-  callQueueAdvance();
-  currentMinute++;
-  if (currentMinute == minutesInDay){
-    currentMinute = 0;
-    callFreq = 0;
-  }
-}, msPerMin) */
 
 var phoneRinger = function(client){
   if (client.frequency <= callFreq && client.callVolume >= randomPercent()) {
@@ -45,9 +29,9 @@ var timer = function(){
     updateCurrentMinute();
     currentMinute++;
     if (currentMinute == minutesInDay){
-      currentMinute = 0;
-      callFreq = 0;
-      timer()
+      let report = endOfDay();
+      renderEndOfDay(report);
+      clearDay()
     } else { timer() }
   }, msPerMin)
 }
@@ -65,8 +49,14 @@ var callChecker = function(op){
       console.log("Time left:" + op.call[0].timeToComplete)
     } else if (op.call[0].timeToComplete == 0) {
       delete op.call[0].timeToComplete;
+      clients.forEach(function(client){
+        if (client.name == op.call.client){
+          client.callTime += op.call.callTime
+        }
+      })
       callGrabber(op.call, callQueue.completed);
-      console.log(op.name + " has completed a call")
+      console.log(op.name + " has completed a call");
+      op.callsCompleted++;
     } else {
       op.call[0].callTime++;
       checkIfCallCompleted(op, op.call[0])
@@ -164,6 +154,61 @@ var manualAnswer = function(event){
     holdingQueue.append(callRender(callObj))
   }
   callStatBoxRefresh()
+}
+
+var endOfDay = function(){
+  let report = {
+    completedCalls: callQueue.completed.length,
+    lostCalls: callQueue.lost.length,
+    ops: [],
+    clients: [],
+    totalTimeOnHold: 0,
+    totalTimeRinging: 0,
+    totalCallTime: 0,
+    amountEarned: 0
+  }
+  callQueue.completed.forEach(function(call){
+    report.totalTimeOnHold += call.timeOnHold;
+    report.totalTimeRinging += call.timeRinging;
+    report.totalCallTime += call.callTime
+  })
+  ops.forEach(function(op){
+    let opReport = {
+      name: op.name,
+      callsCompleted: op.callsCompleted,
+      idleTime: op.idleTime
+    };
+    report.ops.push(op)
+  })
+  clients.forEach(function(client){
+    report.amountEarned += (client.callRate * client.callTime);
+    let clientReport = {
+      name: client.name,
+      type: client.type,
+      opLevel: client.opLevel,
+      callRate: client.callRate,
+      callTime: client.callTime
+    }
+    report.clients.push(client)
+  })
+  return report
+}
+
+var clearDay = function(){
+  currentMinute = 0;
+  callFreq = 0;
+  callQueue.live = [];
+  callQueue.holding = [];
+  callQueue.completed = [];
+  callQueue.lost = [];
+  ops.forEach(function(op){
+    op.idleTime = 0;
+    op.call = [];
+    op.callsCompleted = 0
+  })
+  clients.forEach(function(client){
+    client.callTime = 0
+  })
 }
 
 timer()
