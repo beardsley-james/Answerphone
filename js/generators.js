@@ -4,17 +4,6 @@ var generateFullName = function(){
   return firstName + " " + lastName
 }
 
-var generateBusinessName = function(type){
-  let pool = businessNames[type];
-  let nameTemplate = pool[Math.floor(Math.random()*pool.length)];
-  let name = names.last[Math.floor(Math.random()*names.last.length)];
-  if (nameTemplate.fix == "suf"){
-    return name + nameTemplate.text
-  } else {
-    return nameTemplate.text + name
-  }
-}
-
 var clientGenerator = function(difficulty){
   let type = businessTypes[Math.floor(Math.random()*businessTypes.length)];
   this.type = type;
@@ -106,15 +95,46 @@ var initialsGenerator = function(){
   while (initials.length < 3) {
     initials += alphabet[Math.floor(Math.random() * alphabet.length)]
   }
-  if (initialsChecker){
+  if (initialsChecker(initials)){
     return initials
-  } else {initials = initialsGenerator()}
+  } else { return new initialsGenerator() }
 }
 
 var initialsChecker = function(initials){
+  let same = 0;
   ops.forEach(function(op){
     if (op.name == initials){
-      return false
-    } else {return true}
+      same = 1
+    }
   })
+  if (same == 0){
+    return true
+  } else { return false }
+}
+
+var generateBusinessName = function(type){
+  let pool = businessNames[type];
+  let nameTemplate = pool[Math.floor(Math.random()*pool.length)];
+  let name = names.last[Math.floor(Math.random()*names.last.length)];
+  let busName = "";
+  if (nameTemplate.fix == "suf"){
+    busName = name + nameTemplate.text
+  } else {
+    busName = nameTemplate.text + name
+  }
+  if (businessNameChecker(busName)){
+    return busName
+  } else { return new generateBusinessName(type) }
+}
+
+var businessNameChecker = function(name){
+  let same = 0
+  clients.forEach(function(client){
+    if (client.name == name){
+      same = 1
+    }
+  })
+  if (same == 0){
+    return true
+  } else { return false }
 }

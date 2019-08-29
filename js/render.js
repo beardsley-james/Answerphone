@@ -80,10 +80,11 @@ var opStartup = function(ops){
 
 var updateCurrentMinute = function(){
   let minuteDisplay = document.getElementById("currentMinute");
-  minuteDisplay.innerHTML = currentMinute
+  minuteDisplay.innerHTML = minToStandardTime(currentMinute)
 }
 
 var renderEndOfDay = function(report){
+  delete document.getElementsByClassName("call");
   document.getElementById("tableCallsCompleted").innerHTML = report.completedCalls;
   document.getElementById("tableCallsLost").innerHTML = report.lostCalls;
   document.getElementById("tableTotalTimeRinging").innerHTML = report.totalTimeRinging;

@@ -50,8 +50,8 @@ var callChecker = function(op){
     } else if (op.call[0].timeToComplete == 0) {
       delete op.call[0].timeToComplete;
       clients.forEach(function(client){
-        if (client.name == op.call.client){
-          client.callTime += op.call.callTime
+        if (client.name == op.call[0].client){
+          client.callTime += op.call[0].callTime
         }
       })
       callGrabber(op.call, callQueue.completed);
