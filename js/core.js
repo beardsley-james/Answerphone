@@ -131,7 +131,7 @@ var extractCallNumber = function(elementId){
 }
 
 var manualAnswer = function(event){
-  let target = event.target;
+  let target = event.currentTarget;
   let callId = extractCallNumber(target.id);
   let category = target.parentNode.id;
   var callObj = {};
