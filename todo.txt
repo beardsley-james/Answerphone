@@ -1,4 +1,3 @@
-* RegEx business names so that I can just stick the name wherever. I could also just set a return string and make it way simpler
 * Acquisition of operators
 * Client acquisition
 * Jiggle number values to make it actually fun
@@ -6,3 +5,4 @@
 * Why do the stupid op boxes flop around all over the place? Maybe fix that took
 * Get some more names
 * Get tabs in place so you can click between different screens
+* Clear call queue at day end, or leave it alone so it starts over at midnight

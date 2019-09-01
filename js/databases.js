@@ -28,22 +28,22 @@ var messages = {
 
 var businessNames = {
   hvac: [
-    {fix: "suf", text: " Brothers Plumbing & Heating"},
-    {fix: "pre", text: "HVAC by "},
-    {fix: "suf", text: " Heating & Air Conditioning"},
-    {fix: "suf", text: " Comfort Systems"},
-    {fix: "pre", text: "AC & Heating by "},
-    {fix: "suf", text: " AC Services"}
+    {nameType: "last", pre: "", suf: " Brothers Plumbing & Heating"},
+    {nameType: "full", pre: "HVAC by ", suf: ""},
+    {nameType: "full", pre: "", suf: " Heating & Air Conditioning"},
+    {nameType: "last", pre: "", suf: " Comfort Systems"},
+    {nameType: "first", pre: "AC & Heating by ", suf: ""},
+    {nameType: "full", pre: "", suf: " AC Services"}
   ],
   doctor: [
-    {fix: "pre", text: "The Office of Dr "},
-    {fix: "pre", text: "Dr "},
-    {fix: "pre", text: "Personal Care by Dr "}
+    {nameType: "full", pre: "The Office of Dr ", suf: ""},
+    {nameType: "full", pre: "Dr ", suf: ", M.D."},
+    {nameType: "first", pre: "Personal Care by Dr ", suf: ""}
   ],
   lawyer: [
-    {fix: "pre", text: "The Office of Attorney "},
-    {fix: "pre", text: "Law Offices of "},
-    {fix: "suf", text: " Esquire, Attorney at Law"}
+    {nameType: "full", pre: "The Office of Attorney ", suf: ""},
+    {nameType: "full", pre: "Law Offices of ", suf: ""},
+    {nameType: "last", pre: "Attorney ", suf: " Esquire, Attorney at Law"}
   ]
 }
 
