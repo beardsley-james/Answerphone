@@ -86,7 +86,21 @@ var names = {
     "Diane",
     "Rip",
     "Janina",
-    "Carolyn"
+    "Carolyn",
+    "Sharon",
+    "Jeanne",
+    "Howard",
+    "Chantal",
+    "Kathy",
+    "Deysi",
+    "Gwendolyn",
+    "Anita",
+    "Harry",
+    "Surendram",
+    "Elizabeth",
+    "Bushra",
+    "Barbara",
+    "Ellis"
   ],
   last: [
     "Taylor",
@@ -123,7 +137,21 @@ var names = {
     "Saperstein",
     "Matos",
     "Kowalik",
-    "Bloomquist"
+    "Bloomquist",
+    "Janik",
+    "McMurty",
+    "Gray",
+    "Thompson",
+    "Kinley",
+    "Ixlaj",
+    "Whyte",
+    "Devarakonda",
+    "Houser",
+    "Varma",
+    "Cunningham",
+    "Naz",
+    "Medici",
+    "Tobin"
   ]
 }
 
