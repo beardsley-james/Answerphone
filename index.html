@@ -7,19 +7,25 @@
 
   <div id="controlPanel">
     <span id = "currentMinute"></span>
-    <button onclick="msPerMin = 500">0.5</button>
-    <button onclick="msPerMin = 1000">1</button>
-    <button onclick="msPerMin = 5000">5</button>
+    <span id="speedControls">
+      <button onclick="msPerMin = 5000">|></button>
+      <button onclick="msPerMin = 1000">></button>
+      <button onclick="msPerMin = 500">>></button>
+      <button onclick="msPerMin = 10">>>></button>
+    </span>
     <span id="callStats">
       <span id="numLive" class="callStatBox">0</span>
       <span id="numHolding" class="callStatBox">0</span>
       <span id="numCompleted" class="callStatBox">0</span>
       <span id="numLost" class="callStatBox">0</span>
     </span>
-
+    <span id="panelSelector">
+      <button onclick="revealPanel('callQueue')">Call Activity</button>
+      <button onclick="revealPanel('management')">Management</button>
   </div>
 
   <div id="callQueue" class="panel">
+    <h1 class="panelTitle">Call Activity</h1>
     <div id="liveCalls" class="queue">
       <h1>Live Calls</h1>
     </div>
@@ -30,13 +36,23 @@
     </div>
   </div>
 
-  <div id="humanResources" class="panel">
+  <div id="management" class="panel" display="none">
+    <h1 class="panelTitle">Management Options</h1>
+    <div id="revenue">
+      <h1>Revenue Information</h1>
+    </div>
+    <div id="budgetOptions">
+      <h1>Budget Options</h1>
+    </div>
+    <div id="availableClients">
+      <h1>Interested Clients</h1>
+    </div>
+    <div id="availableOps">
+      <h1>Available Operators</h1>
+    </div>
   </div>
 
-  <div id="financial" class="panel">
-  </div>
-
-  <div id="endOfDayReport" class="report">
+  <div id="endOfDayReport" class="panel" display="none">
     <table>
       <tr>
         <td>Calls Completed</td>
@@ -63,6 +79,7 @@
         <td id="tableAmountEarned"></td>
       </tr>
     </table>
+    <button onclick="revealPanel('callQueue'); timer()">Reset</button>
     <div id="operatorReport">
       <h1>Operator Statistics</h1>
     </div>

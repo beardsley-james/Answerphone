@@ -2,7 +2,10 @@
 * Client acquisition
 * Jiggle number values to make it actually fun
 * Maybe some kind of animation so it doesn't look so jumpy
-* Why do the stupid op boxes flop around all over the place? Maybe fix that took
+* Why do the stupid op boxes flop around all over the place? Maybe fix that too
 * Get some more names
-* Get tabs in place so you can click between different screens
 * Clear call queue at day end, or leave it alone so it starts over at midnight
+* Accumulate money between days
+* Set it up so it goes through days of the week
+* Holidays/bad weather days
+* Set end of day report to reset between days (important)

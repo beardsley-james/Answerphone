@@ -131,4 +131,15 @@ var renderEndOfDay = function(report){
     clientReport.appendChild(callTime);
     document.getElementById("clientReport").appendChild(clientReport)
   })
+  revealPanel("endOfDayReport")
+}
+
+var revealPanel = function(panelId){
+  let panels = document.getElementsByClassName("panel");
+  for (i = 0; i < panels.length; i++){
+    panels[i].style.display = "none";
+  }
+  if (panelId){
+    document.getElementById(panelId).style.display = "block"
+  }
 }

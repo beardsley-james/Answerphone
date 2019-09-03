@@ -1,4 +1,4 @@
-let msPerMin = 1,
+let msPerMin = 1000,
 callFreq = 0,
 minutesInDay = 1440,
 currentMinute = 0,
@@ -212,3 +212,5 @@ var clearDay = function(){
 }
 
 timer()
+
+revealPanel("callQueue")
