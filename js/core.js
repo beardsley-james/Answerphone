@@ -2,7 +2,8 @@ let msPerMin = 1000,
 callFreq = 0,
 minutesInDay = 1440,
 currentMinute = 0,
-day = "monday";
+day = "monday",
+money = 0;
 
 opStartup(ops);
 
@@ -54,6 +55,8 @@ var callChecker = function(op){
           client.callTime += op.call[0].callTime
         }
       })
+      money += (op.call[0].callTime * op.call[0].rate);
+      document.getElementById("bigMoney").innerHTML = moneyDisplay(money);
       callGrabber(op.call, callQueue.completed);
       console.log(op.name + " has completed a call");
       op.callsCompleted++;
@@ -145,6 +148,14 @@ var manualAnswer = function(event){
     }
   })
   if (category == "holding"){
+    callObj.callTime++;
+    clients.forEach(function(client){
+      if (client.name == callObj.client){
+        client.callTime += callObj.callTime
+      }
+    })
+    money += (callObj.callTime * callObj.rate);
+    document.getElementById("bigMoney").innerHTML = moneyDisplay(money);
     callQueue.completed.push(callObj);
     removeCall(callObj)
   } else {

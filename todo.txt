@@ -5,7 +5,6 @@
 * Why do the stupid op boxes flop around all over the place? Maybe fix that too
 * Get some more names
 * Clear call queue at day end, or leave it alone so it starts over at midnight
-* Accumulate money between days
 * Set it up so it goes through days of the week
 * Holidays/bad weather days
 * Set end of day report to reset between days (important)

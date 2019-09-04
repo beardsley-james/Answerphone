@@ -54,6 +54,7 @@ var callGen = function(company){
   this.dispatchTime = 0;
   this.custSatisfaction = 0;
   this.callNumber = callNumber;
+  this.rate = company.callRate;
   callNumber++
 }
 
@@ -117,21 +118,6 @@ var initialsChecker = function(initials){
     return true
   } else { return false }
 }
-
-/* var generateBusinessName = function(type){
-  let pool = businessNames[type];
-  let nameTemplate = pool[Math.floor(Math.random()*pool.length)];
-  let name = names.last[Math.floor(Math.random()*names.last.length)];
-  let busName = "";
-  if (nameTemplate.fix == "suf"){
-    busName = name + nameTemplate.text
-  } else {
-    busName = nameTemplate.text + name
-  }
-  if (businessNameChecker(busName)){
-    return busName
-  } else { return new generateBusinessName(type) }
-} */
 
 var generateBusinessName = function(type){
   let nameTemplate = businessNames[type][Math.floor(Math.random()*businessNames[type].length)];

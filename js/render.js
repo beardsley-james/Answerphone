@@ -90,7 +90,7 @@ var renderEndOfDay = function(report){
   document.getElementById("tableTotalTimeRinging").innerHTML = report.totalTimeRinging;
   document.getElementById("tableTotalHoldTime").innerHTML = report.totalTimeOnHold;
   document.getElementById("tableTotalCallTime").innerHTML = report.totalCallTime;
-  document.getElementById("tableAmountEarned").innerHTML = report.amountEarned;
+  document.getElementById("tableAmountEarned").innerHTML = moneyDisplay(report.amountEarned);
   report.ops.forEach(function(op){
     let opReport = document.createElement("div");
     opReport.setAttribute("class", "opReport");
@@ -142,4 +142,9 @@ var revealPanel = function(panelId){
   if (panelId){
     document.getElementById(panelId).style.display = "block"
   }
+}
+
+var moneyDisplay = function(num){
+  let dollars = num / 100
+  return dollars.toLocaleString("en-us", {style: "currency", currency: "USD"})
 }

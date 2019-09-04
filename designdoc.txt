@@ -126,3 +126,10 @@ As I add more of these things that are really going to effect the "gaminess" of 
 One of the upgrade paths can be to add different speeds to the system yeeeeah so you play near realtime at first and then get more into it.
 
 I still kind of feel like a little interactive fiction could be added in here somewhere but I'm not sure where. Should manual call operations only be available when you're on a certain gamespeed? That would make an interactive fiction bit work a little better.
+
+
+9/4/19
+
+Put in a money variable and made it so completed calls add some moolah to the money variable which seems to be working well, it displays the same thing as the calculated money earned in the end of day report anyway, but there's some kind of weird disconnect happening if I answer a few calls manually and the money variable ends up being higher than the moneyEarned variable which I thought I fixed by making manually answered calls with a talkTime of zero increment the callTime stat in the client object by 1 but I guess it's not working right, I think it's not adding to the client correctly since the money variable is higher. I did a little display thing to show it as money too so that's good.
+
+Fixed by just making answering the holding call increment the callTime by 1 instead of doing weird crap and now it matches up so good enough.
