@@ -19,3 +19,4 @@
 * Display op cards when the possibleOps array is populated
 * Generate advertisement list dynamically based on what's in the database
 * Add an "unlocked" feature to the advertisement database for opening up upgrade paths
+* Add some comments/documentation and do an inventory of the different files line by line
