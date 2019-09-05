@@ -6,6 +6,10 @@ let callQueue = {
   completed: [],
   lost: []
 }
+let campaigns = [],
+completedAds = [];
+let possibleOps = [],
+possibleClients = [];
 
 for (i = 0; i < 5; i++){
   clients.push(new clientGenerator(3))

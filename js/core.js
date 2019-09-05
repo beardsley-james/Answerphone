@@ -28,6 +28,8 @@ var timer = function(){
     callQueueAdvance();
     callStatBoxRefresh();
     updateCurrentMinute();
+    disableUnaffordableButtons();
+    checkAdvertisements();
     currentMinute++;
     if (currentMinute == minutesInDay){
       let report = endOfDay();
@@ -114,14 +116,18 @@ var callQueueAdvance = function(){
   callQueue.holding.forEach(function(call){
     call.timeOnHold++;
     if (call.timeOnHold > 5) {
-      callGrabber(callQueue.holding, callQueue.lost);
+      var i = callQueue.holding.indexOf(call);
+      callQueue.lost.push(callQueue.holding.splice(i, 1));
+      removeCall(call);
       console.log("Caller disconnected while on hold")
     } else {callRefresh(call)}
   })
   callQueue.live.forEach(function(call){
     call.timeRinging++;
     if (call.timeRinging > 3) {
-      callGrabber(callQueue.live, callQueue.lost);
+      var i = callQueue.live.indexOf(call);
+      callQueue.lost.push(callQueue.live.splice(i, 1));
+      removeCall(call);
       console.log("Call rang out")
     } else {callRefresh(call)}
   })
@@ -219,6 +225,48 @@ var clearDay = function(){
   })
   clients.forEach(function(client){
     client.callTime = 0
+  })
+}
+
+var disableUnaffordableButtons = function(){
+  let buttons = document.getElementsByClassName("expenditure");
+  let buttonRegEx = /dol(\d+)/;
+  let className = 0;
+  for (i = 0; i < buttons.length; i++){
+    className = buttons[i].className.split(" ")[1];
+    if (parseInt(buttonRegEx.exec(className)[1]) > money){
+      buttons[i].disabled = true
+    } else { buttons[i].disabled = false }
+  }
+}
+
+var startCampaign = function(campaignType){
+  let campaign = new campaignGenerator(campaignType);
+  campaigns.push(campaign);
+  money -= campaign.cost;
+  document.getElementById("activeCampaigns").append(campaignCard(campaign));
+  document.getElementById(campaign.code + "Ad").style.display = "none"
+}
+
+var checkAdvertisements = function(){
+  campaigns.forEach(function(campaign){
+    if (campaign.duration == 0){
+      console.log("removing " + campaign.id)
+      let i = campaigns.indexOf(campaign);
+      updateAdvertisementCard(campaign);
+      campaigns.splice(i, 1);
+      document.getElementById(campaign.code + "Ad").style.display = "block"
+    } else {
+      if ((Math.random() * 1000) <= campaign.frequency){
+        if (campaign.type == "hr"){
+          possibleOps.push(new opGenerator())
+        } else if (campaign.type == "sales"){
+          possibleClients.push(new clientGenerator(3))
+        }
+      }
+      updateAdvertisementCard(campaign);
+      campaign.duration --
+    }
   })
 }
 

@@ -146,3 +146,17 @@ var businessNameChecker = function(name){
     return true
   } else { return false }
 }
+
+var campaignId = 0;
+
+var campaignGenerator = function(campaignType){
+  let campaign = advertisingCampaigns[campaignType];
+  this.name = campaign.name;
+  this.duration = campaign.duration;
+  this.type = campaign.type;
+  this.frequency = campaign.frequency;
+  this.cost = campaign.cost;
+  this.id = "advertisement" + (campaignId);
+  this.code = campaign.code;
+  campaignId++
+}

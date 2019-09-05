@@ -32,10 +32,12 @@ var callStatBoxRefresh = function(){
   let numLive = document.getElementById("numLive");
   let numCompleted = document.getElementById("numCompleted");
   let numLost = document.getElementById("numLost");
+  let bigMoney = document.getElementById("bigMoney");
   numHolding.innerHTML = callQueue.holding.length;
   numLive.innerHTML = callQueue.live.length;
   numCompleted.innerHTML = callQueue.completed.length;
-  numLost.innerHTML = callQueue.lost.length
+  numLost.innerHTML = callQueue.lost.length;
+  bigMoney.innerHTML = moneyDisplay(money)
 }
 
 var lineBreak = function(){
@@ -81,6 +83,14 @@ var opStartup = function(ops){
 var updateCurrentMinute = function(){
   let minuteDisplay = document.getElementById("currentMinute");
   minuteDisplay.innerHTML = minToStandardTime(currentMinute)
+}
+
+var updateAdvertisementCard = function(advertisement){
+  let advertisementCard = document.getElementById(advertisement.id);
+  let advertisementCardDuration = document.getElementById("duration" + advertisement.id);
+  if (advertisement.duration == 0){
+    advertisementCard.parentNode.removeChild(advertisementCard)
+  } else { advertisementCardDuration.innerHTML = advertisement.duration }
 }
 
 var renderEndOfDay = function(report){
@@ -147,4 +157,22 @@ var revealPanel = function(panelId){
 var moneyDisplay = function(num){
   let dollars = num / 100
   return dollars.toLocaleString("en-us", {style: "currency", currency: "USD"})
+}
+
+var campaignCard = function(campaign){
+  let card = document.createElement("li");
+  card.setAttribute("id", campaign.id);
+  card.setAttribute("class", "campaignCard");
+  let name = document.createElement("span");
+  name.innerHTML = campaign.name;
+  let duration = document.createElement("span");
+  duration.innerHTML = "Time left: ";
+  let durationTimer = document.createElement("span");
+  durationTimer.setAttribute("id", "duration" + campaign.id);
+  durationTimer.innerHTML = campaign.duration;
+  duration.appendChild(durationTimer);
+  card.appendChild(name);
+  card.appendChild(lineBreak());
+  card.appendChild(duration);
+  return card
 }

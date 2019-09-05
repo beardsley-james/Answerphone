@@ -22,6 +22,7 @@
     <span id="panelSelector">
       <button onclick="revealPanel('callQueue')">Call Activity</button>
       <button onclick="revealPanel('management')">Management</button>
+      <button onclick="revealPanel('advertising')">Advertising</button>
     </span>
     <span id="bigMoney">$0</span>
   </div>
@@ -38,13 +39,25 @@
     </div>
   </div>
 
+  <div id="advertising" class="panel">
+    <h1 class="panelTitle">Advertising Campaigns</h1>
+    <div>
+      <h1>Active Advertising Campaigns</h1>
+      <ul id="activeCampaigns"></ul>
+    </div>
+    <div id="startNewCampaigns">
+      <h1>Initiate New Campaign</h1>
+      <ul id="advertisingCampaignsMenu">
+        <li id="craigslistAd"><button class="expenditure dol0" onclick="startCampaign('craigslist')">Free Craiglist Help Wanted Ad</button></li>
+        <li id="tradeMagazineAd"><button class="expenditure dol30000" onclick="startCampaign('tradeMagazine')">Trade Magazine Advertisment $300</button></li>
+      </ul>
+    </div>
+  </div>
+
   <div id="management" class="panel" display="none">
     <h1 class="panelTitle">Management Options</h1>
     <div id="revenue">
       <h1>Revenue Information</h1>
-    </div>
-    <div id="budgetOptions">
-      <h1>Budget Options</h1>
     </div>
     <div id="availableClients">
       <h1>Interested Clients</h1>
@@ -52,6 +65,10 @@
     <div id="availableOps">
       <h1>Available Operators</h1>
     </div>
+  </div>
+
+  <div id="upgrades" class="panel">
+    <h1>Upgrades</h1>
   </div>
 
   <div id="endOfDayReport" class="panel" display="none">

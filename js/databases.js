@@ -1,3 +1,30 @@
+var advertisingCampaigns = {
+  "craigslist": {
+    code: "craigslist",
+    name: "Craigslist Help Wanted",
+    duration: 180,
+    type: "hr",
+    frequency: 1,
+    cost: 0
+  },
+  "tradeMagazine": {
+    code: "tradeMagazine",
+    name: "Trade Magazine Advertisement",
+    duration: 1440 * 30,
+    type: "sales",
+    frequency: 3,
+    cost: 30000
+  },
+  "perfect": {
+    code: "perfect",
+    name: "Perfect Advertisement",
+    duration: 1440 * 0.2,
+    type: "hr",
+    frequency: 1000,
+    cost: 0
+  }
+}
+
 var messages = {
   "hvac": [
     "No AC",
