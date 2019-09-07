@@ -176,3 +176,26 @@ var campaignCard = function(campaign){
   card.appendChild(duration);
   return card
 }
+
+var renderEmploymentApp = function(op){
+  let app = document.createElement("div");
+  app.setAttribute("id", op.name + "Application");
+  app.setAttribute("class", "employmentApp");
+  let name = document.createElement("b");
+  name.innerHTML = op.name;
+  let level = document.createElement("span");
+  level.innerHTML = op.level;
+  let stats = document.createElement("span");
+  stats.innerHTML = "Focus: " + op.focus + ", Personability: " + op.personability;
+  let hireButton = document.createElement("button");
+  hireButton.setAttribute("onclick", "hireOp(" + op.name + ")");
+  let declineButton = document.createElement("button");
+  fireButton.setAttribute("onclick", "declinedOp(" + op.name + ")");
+  app.appendChild(name);
+  app.appendChild(lineBreak());
+  app.appendChild(stats);
+  app.appendChild(lineBreak());
+  app.appendChild(hireButton);
+  app.appendChild(declinedButton);
+  return app
+}
