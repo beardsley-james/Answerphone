@@ -64,20 +64,26 @@ var opUpdater = function(op){
 }
 
 var opStartup = function(ops){
-  let opCool = document.getElementById("opPool");
+  let opPool = document.getElementById("opPool");
   ops.forEach(function(op){
-    let opCard = document.createElement("div");
-    opCard.setAttribute("class", "op");
-    opCard.setAttribute("id", "op" + op.name);
-    let name = document.createElement("b");
-    name.innerHTML = op.level + " " + op.name;
-    let status = document.createElement("span");
-    status.setAttribute("id", "status" + op.name);
-    opCard.appendChild(name);
-    opCard.appendChild(lineBreak());
-    opCard.appendChild(status);
+    let opCard = renderOp(op);
     opPool.appendChild(opCard)
   })
+}
+
+var renderOp = function(op){
+  let opCard = document.createElement("div");
+  opCard.setAttribute("class", "op");
+  opCard.setAttribute("id", "op" + op.name);
+  let name = document.createElement("b");
+  name.innerHTML = op.level + " " + op.name;
+  let status = document.createElement("span");
+  status.setAttribute("id", "status" + op.name);
+  opCard.appendChild(name);
+  opCard.appendChild(lineBreak());
+  opCard.appendChild(status);
+  opPool.appendChild(opCard)
+  return opCard
 }
 
 var updateCurrentMinute = function(){
@@ -179,7 +185,7 @@ var campaignCard = function(campaign){
 
 var renderEmploymentApp = function(op){
   let app = document.createElement("div");
-  app.setAttribute("id", op.name + "Application");
+  app.setAttribute("id", op.name + "application");
   app.setAttribute("class", "employmentApp");
   let name = document.createElement("b");
   name.innerHTML = op.name;
@@ -188,14 +194,16 @@ var renderEmploymentApp = function(op){
   let stats = document.createElement("span");
   stats.innerHTML = "Focus: " + op.focus + ", Personability: " + op.personability;
   let hireButton = document.createElement("button");
-  hireButton.setAttribute("onclick", "hireOp(" + op.name + ")");
+  hireButton.innerHTML = "Hire";
+  hireButton.setAttribute("onclick", "hireOp('" + op.name + "')");
   let declineButton = document.createElement("button");
-  fireButton.setAttribute("onclick", "declinedOp(" + op.name + ")");
+  declineButton.innerHTML = "Decline";
+  declineButton.setAttribute("onclick", "declineOp('" + op.name + "')");
   app.appendChild(name);
   app.appendChild(lineBreak());
   app.appendChild(stats);
   app.appendChild(lineBreak());
   app.appendChild(hireButton);
-  app.appendChild(declinedButton);
+  app.appendChild(declineButton);
   return app
 }

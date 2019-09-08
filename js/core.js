@@ -241,15 +241,27 @@ var checkAdvertisements = function(){
     } else {
       if ((Math.random() * 1000) <= campaign.frequency){
         if (campaign.type == "hr"){
-          possibleOps.push(new opGenerator())
+          possibleOps.push(new opGenerator());
+          document.getElementById("availableOps").appendChild(renderEmploymentApp(possibleOps.slice(-1)[0]))
         } else if (campaign.type == "sales"){
-          possibleClients.push(new clientGenerator(3))
+          possibleClients.push(new clientGenerator(3));
+          document.getElementById("availableClients").appendChild(possibleClients.slice(-1)[0])
         }
       }
       updateAdvertisementCard(campaign);
       campaign.duration --
     }
   })
+}
+
+var hireOp = function(opInitials){
+  let i = possibleOps.findIndex(function(op){
+    op.name = opInitials
+  })
+  ops.push(possibleOps.splice(i, 1)[0]);
+  renderOp(ops[ops.length - 1]);
+  let application = document.getElementById(opInitials + "application");
+  application.parentNode.removeChild(application)
 }
 
 timer()
