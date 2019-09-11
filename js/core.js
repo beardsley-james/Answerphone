@@ -6,6 +6,7 @@ day = "monday",
 money = 0;
 
 opStartup(ops);
+clientStartup(clients);
 
 var phoneRinger = function(client){
   if (client.frequency <= callFreq && client.callVolume >= randomPercent()) {

@@ -26,7 +26,7 @@ var advertisingCampaigns = {
 }
 
 var messages = {
-  "hvac": [
+  hvac: [
     "No AC",
     "No Heat",
     "Out of freon",

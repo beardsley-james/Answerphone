@@ -21,7 +21,9 @@
     </span>
     <span id="panelSelector">
       <button onclick="revealPanel('callQueue')">Call Activity</button>
-      <button onclick="revealPanel('management')">Management</button>
+      <button onclick="revealPanel('humanResources')">Human Resources</button>
+      <button onclick="revealPanel('clientManagement')">Client Management</button>
+      <button onclick="revealPanel('reports')">Reports</button>
       <button onclick="revealPanel('advertising')">Advertising</button>
     </span>
     <span id="bigMoney">$0</span>
@@ -39,6 +41,33 @@
     </div>
   </div>
 
+  <div id="humanResources" class="panel">
+    <h1 class="panelTitle">Human Resources</h1>
+    <div id="operators">
+      <h1>Operators</h1>
+    </div>
+    <div id="availableOps">
+      <h1>Operators Available for Hire</h1>
+    </div>
+  </div>
+
+  <div id="clientManagement" class="panel">
+    <h1 cliass="panelTitle">Client Management</h1>
+    <div id="clients">
+      <h1>Active Clients</h1>
+    </div>
+    <div id="availableClients">
+      <h1>Interested Clients</h1>
+    </div>
+  </div>
+
+  <div id="reports" class="panel">
+    <h1 class="panelTitle">Management Options</h1>
+    <div id="revenue">
+      <h1>Revenue Information</h1>
+    </div>
+  </div>
+
   <div id="advertising" class="panel">
     <h1 class="panelTitle">Advertising Campaigns</h1>
     <div>
@@ -52,19 +81,6 @@
         <li id="tradeMagazineAd"><button class="expenditure dol30000" onclick="startCampaign('tradeMagazine')">Trade Magazine Advertisment $300</button></li>
         <li id="perfectAd"><button class="expenditure dol0" onclick="startCampaign('perfect')">Perfect HR Campaign</button></li>
       </ul>
-    </div>
-  </div>
-
-  <div id="management" class="panel" display="none">
-    <h1 class="panelTitle">Management Options</h1>
-    <div id="revenue">
-      <h1>Revenue Information</h1>
-    </div>
-    <div id="availableClients">
-      <h1>Interested Clients</h1>
-    </div>
-    <div id="availableOps">
-      <h1>Available Operators</h1>
     </div>
   </div>
 

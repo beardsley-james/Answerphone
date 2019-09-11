@@ -76,3 +76,7 @@ h1{
 .panel{
   float: clear
 }
+
+.clientId{
+  text-align: right
+}

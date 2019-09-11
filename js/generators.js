@@ -10,6 +10,8 @@ var generateLastName = function(){
   return names.last[Math.floor(Math.random()*names.last.length)]
 }
 
+var clientId = 0;
+
 var clientGenerator = function(difficulty){
   let type = businessTypes[Math.floor(Math.random()*businessTypes.length)];
   this.type = type;
@@ -19,7 +21,9 @@ var clientGenerator = function(difficulty){
   this.opLevel = determineOpLevel(difficulty);
   this.svcQual = Math.floor(Math.random() * 5) + 1;
   this.callRate = Math.floor(Math.random() * (100-50)) + 50;
-  this.callTime = 0
+  this.callTime = 0;
+  this.id = clientId;
+  clientId++
 }
 
 var returnNumberInRange = function(min, max){
