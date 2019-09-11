@@ -1,4 +1,3 @@
-* Acquisition of operators
 * Client acquisition
 * Jiggle number values to make it actually fun
 * Maybe some kind of animation so it doesn't look so jumpy
@@ -16,7 +15,6 @@
 * Client satisfaction levels based on lost calls and quality of service
 * Switch out the callGrabber function to work with indexes instead of just "pop"
 * Organize functions and variables a bit better.
-* Display op cards when the possibleOps array is populated
-* Generate advertisement list dynamically based on what's in the database
+* Generate advertisement list dynamically based on what's in the database - in progress
 * Add an "unlocked" feature to the advertisement database for opening up upgrade paths
 * Add some comments/documentation and do an inventory of the different files line by line
