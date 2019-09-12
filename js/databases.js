@@ -22,6 +22,14 @@ var advertisingCampaigns = {
     type: "hr",
     frequency: 1000,
     cost: 0
+  },
+  "salesFiesta": {
+    code: "salesFiesta",
+    name: "Sales Fiesta",
+    duration: 100,
+    type: "sales",
+    frequency: 1000,
+    cost: 0
   }
 }
 

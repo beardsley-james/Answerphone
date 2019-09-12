@@ -118,6 +118,11 @@ var initialsChecker = function(initials){
       same = 1
     }
   })
+  possibleOps.forEach(function(op){
+    if (op.name == initials){
+      same = 1
+    }
+  })
   if (same == 0){
     return true
   } else { return false }
@@ -142,6 +147,11 @@ var generateBusinessName = function(type){
 var businessNameChecker = function(name){
   let same = 0
   clients.forEach(function(client){
+    if (client.name == name){
+      same = 1
+    }
+  })
+  possibleClients.forEach(function(client){
     if (client.name == name){
       same = 1
     }

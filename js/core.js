@@ -246,7 +246,7 @@ var checkAdvertisements = function(){
           document.getElementById("availableOps").appendChild(renderEmploymentApp(possibleOps.slice(-1)[0]))
         } else if (campaign.type == "sales"){
           possibleClients.push(new clientGenerator(3));
-          document.getElementById("availableClients").appendChild(possibleClients.slice(-1)[0])
+          document.getElementById("availableClients").appendChild(renderSalesLead(possibleClients.slice(-1)[0]))
         }
       }
       updateAdvertisementCard(campaign);
@@ -260,9 +260,39 @@ var hireOp = function(opInitials){
     op.name = opInitials
   })
   ops.push(possibleOps.splice(i, 1)[0]);
-  renderOp(ops[ops.length - 1]);
+  document.getElementById("operators").appendChild(renderOperatorCard(ops[ops.length - 1]));
+  document.getElementById("opPool").appendChild(renderOp(ops[ops.length - 1]))
   let application = document.getElementById(opInitials + "application");
   application.parentNode.removeChild(application)
+}
+
+var declineOp = function(opInitials){
+  let i = possibleOps.findIndex(function(op){
+    op.name = opInitials
+  })
+  possibleOps.splice(i, 1);
+  let application = document.getElementById(opInitials + "application");
+  application.parentNode.removeChild(application)
+}
+
+var acceptContract = function(clientId){
+  let i = possibleClients.findIndex(function(client){
+    client.id = clientId
+  })
+  clients.push(possibleClients.splice(i, 1)[0]);
+  let clientCard = renderClientCard(clients[clients.length - 1]);
+  document.getElementById("clients").appendChild(clientCard);
+  let lead = document.getElementById("lead" + clientId);
+  lead.parentNode.removeChild(lead)
+}
+
+var declineContract = function(clientId){
+  let i = possibleClients.findIndex(function(client){
+    client.id = clientId
+  })
+  possibleClients.splice(i, 1);
+  let lead = document.getElementById("lead" + clientId);
+  lead.parentNode.removeChild(lead)
 }
 
 timer()
