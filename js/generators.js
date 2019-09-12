@@ -108,7 +108,7 @@ var initialsGenerator = function(){
   }
   if (initialsChecker(initials)){
     return initials
-  } else { return new initialsGenerator() }
+  } else { return initialsGenerator() }
 }
 
 var initialsChecker = function(initials){
@@ -141,7 +141,7 @@ var generateBusinessName = function(type){
   let busName = nameTemplate.pre + name + nameTemplate.suf;
   if (businessNameChecker(busName)){
     return busName
-  } else { return new generateBusinessName(type) }
+  } else { return generateBusinessName(type) }
 }
 
 var businessNameChecker = function(name){

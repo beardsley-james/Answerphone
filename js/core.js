@@ -257,7 +257,7 @@ var checkAdvertisements = function(){
 
 var hireOp = function(opInitials){
   let i = possibleOps.findIndex(function(op){
-    op.name = opInitials
+    return op.name == opInitials
   })
   ops.push(possibleOps.splice(i, 1)[0]);
   document.getElementById("operators").appendChild(renderOperatorCard(ops[ops.length - 1]));
@@ -268,7 +268,7 @@ var hireOp = function(opInitials){
 
 var declineOp = function(opInitials){
   let i = possibleOps.findIndex(function(op){
-    op.name = opInitials
+    return op.name == opInitials
   })
   possibleOps.splice(i, 1);
   let application = document.getElementById(opInitials + "application");
@@ -277,18 +277,20 @@ var declineOp = function(opInitials){
 
 var acceptContract = function(clientId){
   let i = possibleClients.findIndex(function(client){
-    client.id = clientId
+    return client.id == clientId
   })
-  clients.push(possibleClients.splice(i, 1)[0]);
-  let clientCard = renderClientCard(clients[clients.length - 1]);
+  console.log(i);
+  let client = possibleClients.splice(i, 1)[0];
+  let clientCard = renderClientCard(client);
   document.getElementById("clients").appendChild(clientCard);
+  clients.push(client);
   let lead = document.getElementById("lead" + clientId);
   lead.parentNode.removeChild(lead)
 }
 
 var declineContract = function(clientId){
   let i = possibleClients.findIndex(function(client){
-    client.id = clientId
+    return client.id == clientId
   })
   possibleClients.splice(i, 1);
   let lead = document.getElementById("lead" + clientId);
