@@ -41,4 +41,14 @@ var campaignGenerator = function(campaignType){
 callTicket.parentNode.removeChild(callTicket)
 
 var i = callQueue.holding.indexOf(call);
-callQueue.lost.push(callQueue.holding.splice(i, 1));*/
+callQueue.lost.push(callQueue.holding.splice(i, 1));
+
+var revealPanel = function(panelId){
+  let panels = document.getElementsByClassName("panel");
+  for (i = 0; i < panels.length; i++){
+    panels[i].style.display = "none";
+  }
+  if (panelId){
+    document.getElementById(panelId).style.display = "block"
+  }
+}*/

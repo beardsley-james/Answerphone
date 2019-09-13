@@ -111,7 +111,16 @@ var updateAdvertisementCard = function(advertisement){
 }
 
 var renderEndOfDay = function(report){
-  delete document.getElementsByClassName("call");
+  if (daysElapsed > 0){
+    let opReports = Array.from(document.getElementsByClassName("opReport"));
+    let clientReports = Array.from(document.getElementsByClassName("clientReport"));
+    opReports.forEach(function(report){
+      report.parentNode.removeChild(report)
+    })
+    clientReports.forEach(function(report){
+      report.parentNode.removeChild(report)
+    })
+  }
   document.getElementById("tableCallsCompleted").innerHTML = report.completedCalls;
   document.getElementById("tableCallsLost").innerHTML = report.lostCalls;
   document.getElementById("tableTotalTimeRinging").innerHTML = report.totalTimeRinging;
@@ -158,6 +167,7 @@ var renderEndOfDay = function(report){
     clientReport.appendChild(callTime);
     document.getElementById("clientReport").appendChild(clientReport)
   })
+  document.getElementById("panelSelector").style.display = "none";
   revealPanel("endOfDayReport")
 }
 
@@ -354,4 +364,10 @@ var renderOperatorCard = function(op){
   opCard.appendChild(fireButton);
   opCard.appendChild(promoteButton);
   return opCard
+}
+
+var endOfDayResetButton = function(){
+  revealPanel("callQueue");
+  document.getElementById("panelSelector").style.display = "inline";
+  timer()
 }

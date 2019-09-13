@@ -1,12 +1,9 @@
-* Client acquisition
 * Jiggle number values to make it actually fun
 * Maybe some kind of animation so it doesn't look so jumpy
 * Why do the stupid op boxes flop around all over the place? Maybe fix that too
 * Get some more names
-* Clear call queue at day end, or leave it alone so it starts over at midnight
 * Set it up so it goes through days of the week
 * Holidays/bad weather days
-* Set end of day report to reset between days (important)
 * Make operators work for certain amounts of time and pay them
 * Speed up time when there aren't calls coming in
 * Implement backgrounds/experience and focus/personability, make sure they effect some of the game options
@@ -18,3 +15,5 @@
 * Generate advertisement list dynamically based on what's in the database - in progress
 * Add an "unlocked" feature to the advertisement database for opening up upgrade paths
 * Add some comments/documentation and do an inventory of the different files line by line
+* fireOp, promoteOp, term985inateClient, and raiseRates functions need to be programmed
+* Consistent verbiage - too many different words for possible/potential clients, also need to clean up the verbiage for functions

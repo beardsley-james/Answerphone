@@ -155,3 +155,7 @@ Did a lot of scratch paper work at my job today thinking about how dispatching i
 9/11/19
 
 It's amazing how much you can mess up by using = when you mean ==. Client cards displaying properly now, advertisements generate sales leads you can accept or decline, operators get dedicated cards with updateable stats so they'll be able to be used to review operator performance.
+
+9/13/19
+
+Quality of life stuff tonight. Set it up so it deletes last night's entries for the end of day report and hides the panel selection buttons when the end of day report is visible. There are different display options for dom elements, before the advertising campaigns were popping up without their bullets even though it's a list because it was set to bring them back with display block but I changed it to list-item so now it displays properly, I figured it out because the buttons popped back into place BELOW the status line on the top of the screen so I was like huh switched to display inline and it worked out so I looked up what my other options were. I need to start thinking about implementing some game elements soon though so I can start testing properly.

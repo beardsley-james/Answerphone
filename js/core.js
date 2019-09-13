@@ -3,7 +3,8 @@ callFreq = 0,
 minutesInDay = 1440,
 currentMinute = 0,
 day = "monday",
-money = 0;
+money = 0,
+daysElapsed = 0;
 
 opStartup(ops);
 clientStartup(clients);
@@ -32,7 +33,8 @@ var timer = function(){
     if (currentMinute == minutesInDay){
       let report = endOfDay();
       renderEndOfDay(report);
-      clearDay()
+      clearDay();
+      daysElapsed++
     } else { timer() }
   }, msPerMin)
 }
@@ -198,8 +200,6 @@ var endOfDay = function(){
 var clearDay = function(){
   currentMinute = 0;
   callFreq = 0;
-  callQueue.live = [];
-  callQueue.holding = [];
   callQueue.completed = [];
   callQueue.lost = [];
   ops.forEach(function(op){
@@ -238,7 +238,7 @@ var checkAdvertisements = function(){
       let i = campaigns.indexOf(campaign);
       updateAdvertisementCard(campaign);
       campaigns.splice(i, 1);
-      document.getElementById(campaign.code + "Ad").style.display = "block"
+      document.getElementById(campaign.code + "Ad").style.display = "list-item"
     } else {
       if ((Math.random() * 1000) <= campaign.frequency){
         if (campaign.type == "hr"){
