@@ -17,3 +17,4 @@
 * Add some comments/documentation and do an inventory of the different files line by line
 * fireOp, promoteOp, term985inateClient, and raiseRates functions need to be programmed
 * Consistent verbiage - too many different words for possible/potential clients, also need to clean up the verbiage for functions
+* Reconfigure generator functions to take a settings object as the argument and use that information to determine what kind of entity to produce
