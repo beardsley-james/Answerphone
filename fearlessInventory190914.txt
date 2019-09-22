@@ -67,4 +67,15 @@ generators.js
   generateBusinesName(type): this is very different than generateInitials because it has to give a full name and some other stuff. right now it just goes through the different possibilities for the business type, picks one at random, figures out what kind of name it's supposed to take and slots it in, but i think i want to open this up a bit and let the name options get passed as an array and pick from different options randomly so some business names of the type could have full names and others could have first names and yet others could be selected from a list of exclamatory adjectives like "GREAT HVAC" or something. i like that idea and i should implement it.
   businessNameChecker(name) is the same as initials like literally the same except it checks different lists that's it.
   campaignId should go somewhere else
-  campaignGenerator(campaignType): this generates a new campaign object based on the campaignTypes options in database.js, 
+  campaignGenerator(campaignType): this generates a new campaign object based on the campaignTypes options in database.js, I don't think this actually needs much to do.
+
+index.js
+  I've just been using this as a scratch pad it isn't actually doing anything.
+
+models.js
+  This is an empty file. what do I even want to do with this?
+
+queue.js
+  originally this was going to be the file that handled queue behavior but somehow i ended up doing a lot more with core.js than what i'm doing here and this has become sort of a test state initializer, which i want to switch over to being handled by a save file system that eventually get tied to local memory to allow save games.
+  the whole first twelve lines are just establishing empty sets to be filled elsewhere. this might actually be where the save file is, isn't it, these variables are pretty much the game state except for some counters. maybe i'll start working on the save file system in here.
+  a couple for statements generate random clients/operators and put them into clients[] and ops[] wherer the game can work with them. basically just a test state. not a controlled one though, since randomization is one of the big features i'm testing. do i want an equal number of ops and clients to be near optimal? symmetry is nice but i guess you're going to need more ops than clients at some point since it seems like one busy client is enough to result in some missed calls. i guess that's going to be a call for the player, since losing calls is going to hurt your relationship with the clients but overstaffing loses you money and it's all about the profit. maybe i could make some kind of political point by having something other than profit drive the game though. there are going to be shifts i think, since not everyone is going to work at the same time, so you'll need more operators than clients probably. guess we'll see. there's still a lot left to do on this.
