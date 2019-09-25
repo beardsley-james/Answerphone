@@ -1,3 +1,5 @@
+// Call functions
+
 var callRender = function(call){
   let callTicket = document.createElement("div");
   callTicket.setAttribute("id", ("call" + call.callNumber))
@@ -40,18 +42,17 @@ var callStatBoxRefresh = function(){
   bigMoney.innerHTML = moneyDisplay(money)
 }
 
-var lineBreak = function(){
-  let br = document.createElement("br");
-  return br
-}
-
 var removeCall = function(call){
+  // this should be replaced with "remove element" function and switched out wherever it shows up
   let callId = "call" + call.callNumber;
   let callTicket = document.getElementById(callId);
   callTicket.parentNode.removeChild(callTicket)
 }
 
+// operator functions
+
 var opUpdater = function(op){
+  // need to add other conditions in here so that you can tell what else the op is doing
   let status = document.getElementById("status" + op.name);
   let opCard = document.getElementById("queue" + op.name);
   if (op.call.length > 0) {
@@ -64,6 +65,7 @@ var opUpdater = function(op){
 }
 
 var opStartup = function(ops){
+  // this needs to be wrapped in a new file called save.js that loads whatever into the DOM
   let opPool = document.getElementById("opPool");
   let operators = document.getElementById("operators");
   ops.forEach(function(op){
@@ -74,15 +76,8 @@ var opStartup = function(ops){
   })
 }
 
-var clientStartup = function(clients){
-  let clientList = document.getElementById("clients");
-  clients.forEach(function(client){
-    let clientCard = renderClientCard(client);
-    clientList.appendChild(clientCard)
-  })
-}
-
 var renderOp = function(op){
+  // should be renamed to renderOpStatus to differentiate from renderOpCard
   let opCard = document.createElement("div");
   opCard.setAttribute("class", "op");
   opCard.setAttribute("id", "queue" + op.name);
@@ -97,17 +92,221 @@ var renderOp = function(op){
   return opCard
 }
 
-var updateCurrentMinute = function(){
-  let minuteDisplay = document.getElementById("currentMinute");
-  minuteDisplay.innerHTML = minToStandardTime(currentMinute)
+var renderEmploymentApp = function(op){
+  let app = document.createElement("div");
+  app.setAttribute("id", op.name + "application");
+  app.setAttribute("class", "employmentApp");
+  let name = document.createElement("b");
+  name.innerHTML = op.name;
+  let level = document.createElement("span");
+  level.innerHTML = op.level;
+  let stats = document.createElement("span");
+  stats.innerHTML = "Focus: " + op.focus + ", Personability: " + op.personability;
+  let hireButton = document.createElement("button");
+  hireButton.innerHTML = "Hire";
+  hireButton.setAttribute("onclick", "hireOp('" + op.name + "')");
+  let declineButton = document.createElement("button");
+  declineButton.innerHTML = "Decline";
+  declineButton.setAttribute("onclick", "declineOp('" + op.name + "')");
+  app.appendChild(name);
+  app.appendChild(lineBreak());
+  app.appendChild(stats);
+  app.appendChild(lineBreak());
+  app.appendChild(hireButton);
+  app.appendChild(declineButton);
+  return app
 }
 
+var renderOperatorCard = function(op){
+  // change to renderOpCard
+  let opCard = document.createElement("div");
+  opCard.setAttribute("id", "op" + op.name);
+  opCard.setAttribute("class", "opCard");
+  let name = document.createElement("b");
+  name.innerHTML = op.name;
+  let level = document.createElement("span");
+  let levelValue = document.createElement("span");
+  levelValue.innerHTML = op.level;
+  levelValue.setAttribute("id", op.name + "level");
+  level.innerHTML = "Level ";
+  level.appendChild(levelValue);
+  let wage = document.createElement("span");
+  wage.innerHTML = "Hourly wage: ";
+  let wageValue = document.createElement("span");
+  wageValue.setAttribute("id", op.name + "wage");
+  //wageValue.innerHTML = moneyDisplay(op.wage);
+  wageValue.innerHTML = "$0";
+  wage.appendChild(wageValue);
+  let averageCallTime = document.createElement("span");
+  averageCallTime.innerHTML = "Average call time: ";
+  let averageCallTimeValue = document.createElement("span");
+  averageCallTime.setAttribute("id", op.name + "calltime");
+  averageCallTime.appendChild(averageCallTimeValue);
+  let focus = document.createElement("span");
+  focus.innerHTML = "Focus: ";
+  let focusValue = document.createElement("span");
+  focusValue.setAttribute("id", op.name + "focus");
+  focusValue.innerHTML = op.focus;
+  focus.appendChild(focusValue)
+  let personability = document.createElement("span");
+  personability.innerHTML = " Personability: "
+  let personabilityValue = document.createElement("span");
+  personabilityValue.setAttribute("id", op.name + personability);
+  personabilityValue.innerHTML = op.personability;
+  personability.appendChild(personabilityValue);
+  let fireButton = document.createElement("button");
+  fireButton.setAttribute("onclick", "fireOp('" + op.name + "')");
+  fireButton.innerHTML = "Fire";
+  let promoteButton = document.createElement("button");
+  promoteButton.setAttribute("onclick", "promoteOp('" + op.name + "')");
+  promoteButton.innerHTML = "Promote";
+  opCard.appendChild(name);
+  opCard.appendChild(lineBreak())
+  opCard.appendChild(level);
+  opCard.appendChild(lineBreak())
+  opCard.appendChild(wage);
+  opCard.appendChild(lineBreak())
+  opCard.appendChild(averageCallTime);
+  opCard.appendChild(lineBreak())
+  opCard.appendChild(focus);
+  opCard.appendChild(personability);
+  opCard.appendChild(lineBreak())
+  opCard.appendChild(fireButton);
+  opCard.appendChild(promoteButton);
+  return opCard
+}
+
+// client functions
+
+var clientStartup = function(clients){
+  // candidate for save.js
+  let clientList = document.getElementById("clients");
+  clients.forEach(function(client){
+    let clientCard = renderClientCard(client);
+    clientList.appendChild(clientCard)
+  })
+}
+
+var renderSalesLead = function(client){
+  let lead = document.createElement("div");
+  lead.setAttribute("id", "lead" + client.id);
+  lead.setAttribute("class", "salesLead");
+  let name = document.createElement("b");
+  name.innerHTML = client.name;
+  let level = document.createElement("span");
+  level.innerHTML = "Op Level: " + client.opLevel;
+  let rate = document.createElement("span");
+  rate.innerHTML = "Per minute rate: " + moneyDisplay(client.callRate);
+  let acceptButton = document.createElement("button");
+  acceptButton.innerHTML = "Accept Contract";
+  acceptButton.setAttribute("onclick", "acceptContract('" + client.id + "')");
+  let declineButton = document.createElement("button");
+  declineButton.innerHTML = "Decline Contract";
+  declineButton.setAttribute("onclick", "declineContract('" + client.id + "')");
+  lead.appendChild(name);
+  lead.appendChild(lineBreak());
+  lead.appendChild(rate);
+  lead.appendChild(lineBreak());
+  lead.appendChild(acceptButton);
+  lead.appendChild(declineButton);
+  return lead
+}
+
+var renderClientCard = function(client){
+  let clientCard = document.createElement("div");
+  clientCard.setAttribute("id", "client" + client.id);
+  clientCard.setAttribute("class", "clientCard");
+  let name = document.createElement("b");
+  name.innerHTML = client.name;
+  let type = document.createElement("span");
+  type.innerHTML = client.type;
+  let level = document.createElement("span");
+  level.innerHTML = "Level " + client.opLevel;
+  let callsPerDay = document.createElement("span");
+  callsPerDay.innerHTML = "Calls per day: ";
+  let callsPerDayValue = document.createElement("span");
+  callsPerDayValue.innerHTML = "0";
+  callsPerDayValue.setAttribute("id", "callsPerDay" + client.id);
+  callsPerDay.appendChild(callsPerDayValue);
+  let rate = document.createElement("span");
+  rate.innerHTML = "Per Minute Rate: ";
+  let rateValue = document.createElement("span");
+  rateValue.setAttribute("id", "rate" + client.id);
+  rateValue.innerHTML = moneyDisplay(client.callRate);
+  rate.appendChild(rateValue);
+  let terminateButton = document.createElement("button");
+  terminateButton.setAttribute("onclick", "terminateClient('" + client.id + "')");
+  terminateButton.innerHTML = "Terminate Contract";
+  let raiseRatesButton = document.createElement("button");
+  raiseRatesButton.setAttribute("onclick", "raiseRates('" + client.id + "')");
+  raiseRatesButton.innerHTML = "Raise Rates";
+  clientCard.appendChild(name);
+  clientCard.appendChild(lineBreak());
+  clientCard.appendChild(type);
+  clientCard.appendChild(lineBreak());
+  clientCard.appendChild(level);
+  clientCard.appendChild(lineBreak());
+  clientCard.appendChild(callsPerDay);
+  clientCard.appendChild(lineBreak());
+  clientCard.appendChild(rate);
+  clientCard.appendChild(lineBreak());
+  clientCard.appendChild(terminateButton);
+  clientCard.appendChild(raiseRatesButton);
+  return clientCard
+}
+
+// advertisement functions
+
 var updateAdvertisementCard = function(advertisement){
+  // add additional information based on unlocked upgrades
   let advertisementCard = document.getElementById(advertisement.id);
   let advertisementCardDuration = document.getElementById("duration" + advertisement.id);
   if (advertisement.duration == 0){
     advertisementCard.parentNode.removeChild(advertisementCard)
   } else { advertisementCardDuration.innerHTML = advertisement.duration }
+}
+
+var campaignCard = function(campaign){
+  // change to renderCampaignCard
+  let card = document.createElement("li");
+  card.setAttribute("id", campaign.id);
+  card.setAttribute("class", "campaignCard");
+  let name = document.createElement("span");
+  name.innerHTML = campaign.name;
+  let duration = document.createElement("span");
+  duration.innerHTML = "Time left: ";
+  let durationTimer = document.createElement("span");
+  durationTimer.setAttribute("id", "duration" + campaign.id);
+  durationTimer.innerHTML = campaign.duration;
+  duration.appendChild(durationTimer);
+  card.appendChild(name);
+  card.appendChild(lineBreak());
+  card.appendChild(duration);
+  return card
+}
+
+var renderCampaignButton = function(campaign){
+  let listItem = document.createElement("li");
+  listItem.setAttribute("id", campaign.code + "Ad");
+  let button = document.createElement("button");
+  button.setAttribute("class", "expenditure dol" + campaign.cost);
+  button.setAttribute("onclick", "startCampaign('" + campaign.code + "')");
+  button.innerHTML = campaign.name + moneyDisplay(campaign.cost);
+  listItem.appendChild(button);
+  return listItem
+}
+
+// utility functions
+
+var lineBreak = function(){
+  let br = document.createElement("br");
+  return br
+}
+
+var updateCurrentMinute = function(){
+  // add military time option
+  let minuteDisplay = document.getElementById("currentMinute");
+  minuteDisplay.innerHTML = minToStandardTime(currentMinute)
 }
 
 var renderEndOfDay = function(report){
@@ -186,187 +385,8 @@ var moneyDisplay = function(num){
   return dollars.toLocaleString("en-us", {style: "currency", currency: "USD"})
 }
 
-var campaignCard = function(campaign){
-  let card = document.createElement("li");
-  card.setAttribute("id", campaign.id);
-  card.setAttribute("class", "campaignCard");
-  let name = document.createElement("span");
-  name.innerHTML = campaign.name;
-  let duration = document.createElement("span");
-  duration.innerHTML = "Time left: ";
-  let durationTimer = document.createElement("span");
-  durationTimer.setAttribute("id", "duration" + campaign.id);
-  durationTimer.innerHTML = campaign.duration;
-  duration.appendChild(durationTimer);
-  card.appendChild(name);
-  card.appendChild(lineBreak());
-  card.appendChild(duration);
-  return card
-}
-
-var renderEmploymentApp = function(op){
-  let app = document.createElement("div");
-  app.setAttribute("id", op.name + "application");
-  app.setAttribute("class", "employmentApp");
-  let name = document.createElement("b");
-  name.innerHTML = op.name;
-  let level = document.createElement("span");
-  level.innerHTML = op.level;
-  let stats = document.createElement("span");
-  stats.innerHTML = "Focus: " + op.focus + ", Personability: " + op.personability;
-  let hireButton = document.createElement("button");
-  hireButton.innerHTML = "Hire";
-  hireButton.setAttribute("onclick", "hireOp('" + op.name + "')");
-  let declineButton = document.createElement("button");
-  declineButton.innerHTML = "Decline";
-  declineButton.setAttribute("onclick", "declineOp('" + op.name + "')");
-  app.appendChild(name);
-  app.appendChild(lineBreak());
-  app.appendChild(stats);
-  app.appendChild(lineBreak());
-  app.appendChild(hireButton);
-  app.appendChild(declineButton);
-  return app
-}
-
-var renderSalesLead = function(client){
-  let lead = document.createElement("div");
-  lead.setAttribute("id", "lead" + client.id);
-  lead.setAttribute("class", "salesLead");
-  let name = document.createElement("b");
-  name.innerHTML = client.name;
-  let level = document.createElement("span");
-  level.innerHTML = "Op Level: " + client.opLevel;
-  let rate = document.createElement("span");
-  rate.innerHTML = "Per minute rate: " + moneyDisplay(client.callRate);
-  let acceptButton = document.createElement("button");
-  acceptButton.innerHTML = "Accept Contract";
-  acceptButton.setAttribute("onclick", "acceptContract('" + client.id + "')");
-  let declineButton = document.createElement("button");
-  declineButton.innerHTML = "Decline Contract";
-  declineButton.setAttribute("onclick", "declineContract('" + client.id + "')");
-  lead.appendChild(name);
-  lead.appendChild(lineBreak());
-  lead.appendChild(rate);
-  lead.appendChild(lineBreak());
-  lead.appendChild(acceptButton);
-  lead.appendChild(declineButton);
-  return lead
-}
-
-var renderCampaignButton = function(campaign){
-  let listItem = document.createElement("li");
-  listItem.setAttribute("id", campaign.code + "Ad");
-  let button = document.createElement("button");
-  button.setAttribute("class", "expenditure dol" + campaign.cost);
-  button.setAttribute("onclick", "startCampaign('" + campaign.code + "')");
-  button.innerHTML = campaign.name + moneyDisplay(campaign.cost);
-  listItem.appendChild(button);
-  return listItem
-}
-
-var renderClientCard = function(client){
-  let clientCard = document.createElement("div");
-  clientCard.setAttribute("id", "client" + client.id);
-  clientCard.setAttribute("class", "clientCard");
-  let name = document.createElement("b");
-  name.innerHTML = client.name;
-  let type = document.createElement("span");
-  type.innerHTML = client.type;
-  let level = document.createElement("span");
-  level.innerHTML = "Level " + client.opLevel;
-  let callsPerDay = document.createElement("span");
-  callsPerDay.innerHTML = "Calls per day: ";
-  let callsPerDayValue = document.createElement("span");
-  callsPerDayValue.innerHTML = "0";
-  callsPerDayValue.setAttribute("id", "callsPerDay" + client.id);
-  callsPerDay.appendChild(callsPerDayValue);
-  let rate = document.createElement("span");
-  rate.innerHTML = "Per Minute Rate: ";
-  let rateValue = document.createElement("span");
-  rateValue.setAttribute("id", "rate" + client.id);
-  rateValue.innerHTML = moneyDisplay(client.callRate);
-  rate.appendChild(rateValue);
-  let terminateButton = document.createElement("button");
-  terminateButton.setAttribute("onclick", "terminateClient('" + client.id + "')");
-  terminateButton.innerHTML = "Terminate Contract";
-  let raiseRatesButton = document.createElement("button");
-  raiseRatesButton.setAttribute("onclick", "raiseRates('" + client.id + "')");
-  raiseRatesButton.innerHTML = "Raise Rates";
-  clientCard.appendChild(name);
-  clientCard.appendChild(lineBreak());
-  clientCard.appendChild(type);
-  clientCard.appendChild(lineBreak());
-  clientCard.appendChild(level);
-  clientCard.appendChild(lineBreak());
-  clientCard.appendChild(callsPerDay);
-  clientCard.appendChild(lineBreak());
-  clientCard.appendChild(rate);
-  clientCard.appendChild(lineBreak());
-  clientCard.appendChild(terminateButton);
-  clientCard.appendChild(raiseRatesButton);
-  return clientCard
-}
-
-var renderOperatorCard = function(op){
-  let opCard = document.createElement("div");
-  opCard.setAttribute("id", "op" + op.name);
-  opCard.setAttribute("class", "opCard");
-  let name = document.createElement("b");
-  name.innerHTML = op.name;
-  let level = document.createElement("span");
-  let levelValue = document.createElement("span");
-  levelValue.innerHTML = op.level;
-  levelValue.setAttribute("id", op.name + "level");
-  level.innerHTML = "Level ";
-  level.appendChild(levelValue);
-  let wage = document.createElement("span");
-  wage.innerHTML = "Hourly wage: ";
-  let wageValue = document.createElement("span");
-  wageValue.setAttribute("id", op.name + "wage");
-  //wageValue.innerHTML = moneyDisplay(op.wage);
-  wageValue.innerHTML = "$0";
-  wage.appendChild(wageValue);
-  let averageCallTime = document.createElement("span");
-  averageCallTime.innerHTML = "Average call time: ";
-  let averageCallTimeValue = document.createElement("span");
-  averageCallTime.setAttribute("id", op.name + "calltime");
-  averageCallTime.appendChild(averageCallTimeValue);
-  let focus = document.createElement("span");
-  focus.innerHTML = "Focus: ";
-  let focusValue = document.createElement("span");
-  focusValue.setAttribute("id", op.name + "focus");
-  focusValue.innerHTML = op.focus;
-  focus.appendChild(focusValue)
-  let personability = document.createElement("span");
-  personability.innerHTML = " Personability: "
-  let personabilityValue = document.createElement("span");
-  personabilityValue.setAttribute("id", op.name + personability);
-  personabilityValue.innerHTML = op.personability;
-  personability.appendChild(personabilityValue);
-  let fireButton = document.createElement("button");
-  fireButton.setAttribute("onclick", "fireOp('" + op.name + "')");
-  fireButton.innerHTML = "Fire";
-  let promoteButton = document.createElement("button");
-  promoteButton.setAttribute("onclick", "promoteOp('" + op.name + "')");
-  promoteButton.innerHTML = "Promote";
-  opCard.appendChild(name);
-  opCard.appendChild(lineBreak())
-  opCard.appendChild(level);
-  opCard.appendChild(lineBreak())
-  opCard.appendChild(wage);
-  opCard.appendChild(lineBreak())
-  opCard.appendChild(averageCallTime);
-  opCard.appendChild(lineBreak())
-  opCard.appendChild(focus);
-  opCard.appendChild(personability);
-  opCard.appendChild(lineBreak())
-  opCard.appendChild(fireButton);
-  opCard.appendChild(promoteButton);
-  return opCard
-}
-
 var endOfDayResetButton = function(){
+  // move to core.js
   revealPanel("callQueue");
   document.getElementById("panelSelector").style.display = "inline";
   timer()
