@@ -1,11 +1,3 @@
-let msPerMin = 1000,
-callFreq = 0,
-minutesInDay = 1440,
-currentMinute = 0,
-day = "monday",
-money = 0,
-daysElapsed = 0;
-
 opStartup(ops);
 clientStartup(clients);
 
@@ -260,8 +252,8 @@ var hireOp = function(opInitials){
     return op.name == opInitials
   })
   ops.push(possibleOps.splice(i, 1)[0]);
-  document.getElementById("operators").appendChild(renderOperatorCard(ops[ops.length - 1]));
-  document.getElementById("opPool").appendChild(renderOp(ops[ops.length - 1]))
+  document.getElementById("operators").appendChild(renderOpCard(ops[ops.length - 1]));
+  document.getElementById("opPool").appendChild(renderOpStatus(ops[ops.length - 1]))
   let application = document.getElementById(opInitials + "application");
   application.parentNode.removeChild(application)
 }

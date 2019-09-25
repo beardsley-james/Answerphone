@@ -69,15 +69,14 @@ var opStartup = function(ops){
   let opPool = document.getElementById("opPool");
   let operators = document.getElementById("operators");
   ops.forEach(function(op){
-    let queueCard = renderOp(op);
-    let opCard = renderOperatorCard(op);
+    let queueCard = renderOpStatus(op);
+    let opCard = renderOpCard(op);
     opPool.appendChild(queueCard);
     operators.appendChild(opCard)
   })
 }
 
-var renderOp = function(op){
-  // should be renamed to renderOpStatus to differentiate from renderOpCard
+var renderOpStatus = function(op){
   let opCard = document.createElement("div");
   opCard.setAttribute("class", "op");
   opCard.setAttribute("id", "queue" + op.name);
@@ -117,8 +116,7 @@ var renderEmploymentApp = function(op){
   return app
 }
 
-var renderOperatorCard = function(op){
-  // change to renderOpCard
+var renderOpCard = function(op){
   let opCard = document.createElement("div");
   opCard.setAttribute("id", "op" + op.name);
   opCard.setAttribute("class", "opCard");

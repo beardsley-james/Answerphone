@@ -10,8 +10,6 @@ var generateLastName = function(){
   return names.last[Math.floor(Math.random()*names.last.length)]
 }
 
-var clientId = 0;
-
 var clientGenerator = function(difficulty){
   let type = businessTypes[Math.floor(Math.random()*businessTypes.length)];
   this.type = type;
@@ -43,8 +41,6 @@ var callCheck = function(frequency){
     return true
   }
 }
-
-var callNumber = 0;
 
 var callGen = function(company){
   this.name = generateFullName();
@@ -160,8 +156,6 @@ var businessNameChecker = function(name){
     return true
   } else { return false }
 }
-
-var campaignId = 0;
 
 var campaignGenerator = function(campaignType){
   let campaign = advertisingCampaigns[campaignType];
