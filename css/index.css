@@ -65,6 +65,10 @@ div{
 
 .inactive{}
 
+.completingCall{
+  background-color: CornFlowerBlue
+}
+
 h1{
   text-align: center
 }

@@ -56,8 +56,13 @@ var opUpdater = function(op){
   let status = document.getElementById("status" + op.name);
   let opCard = document.getElementById("queue" + op.name);
   if (op.call.length > 0) {
-    status.innerHTML = op.call[0].name + ", " + op.call[0].client;
-    opCard.setAttribute("class", "op active")
+    if (op.call[0].timeToComplete > -1) {
+      status.innerHTML = op.call[0].name + ", " + op.call[0].client;
+      opCard.setAttribute("class", "op completingCall")
+    } else {
+      status.innerHTML = op.call[0].name + ", " + op.call[0].client;
+      opCard.setAttribute("class", "op active")
+    }
   } else {
     status.innerHTML = "Standby";
     opCard.setAttribute("class", "op inactive")

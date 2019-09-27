@@ -1,9 +1,12 @@
+//global variables
+
 var msPerMin = 1000,
 callFreq = 0,
 currentMinute = 0,
 day = "monday",
 money = 0,
-daysElapsed = 0;
+daysElapsed = 0,
+autoTime = false;
 
 var clientId = 0;
 var callNumber = 0;
@@ -24,11 +27,14 @@ completedAds = [];
 var possibleOps = [],
 possibleClients = [];
 
-if (localStorage.getItem("save")){
+// check for saved games
+/* if (localStorage.getItem("save")){
   let saveFile = JSON.parse(localStorage.getItem("save"));
   load(saveFile)
-}
+} */
 
+
+//load & save functions
 var load = function(saveFile){
   msPerMin = saveFile.msPerMin;
   callFreq = saveFile.callFreq;
