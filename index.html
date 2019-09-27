@@ -8,6 +8,7 @@
   <div id="controlPanel">
     <span id = "currentMinute"></span>
     <span id="speedControls">
+      <button onclick="autoTime = true">Auto</button>
       <button onclick="msPerMin = 5000">|></button>
       <button onclick="msPerMin = 1000">></button>
       <button onclick="msPerMin = 500">>></button>
@@ -27,6 +28,22 @@
       <button onclick="revealPanel('advertising')">Advertising</button>
     </span>
     <span id="bigMoney">$0</span>
+  </div>
+
+  <div id="loadGame" class="panel">
+    <h1>Load Game or Start New Game</h1>
+    <div id="saveFile1" class="saveFile">
+      <h2>Save File 1</h2>
+      <button onclick="startGame('save1')">Start New Game</button>
+    </div>
+    <div id="saveFile2" class="saveFile">
+      <h2>Save File 2</h2>
+      <button onclick="startGame('save2')">Start New Game</button>
+    </div>
+    <div id="saveFile3" class="saveFile">
+      <h2>Save File 1</h2>
+      <button onclick="startGame('save3')">Start New Game</button>
+    </div>
   </div>
 
   <div id="callQueue" class="panel">
