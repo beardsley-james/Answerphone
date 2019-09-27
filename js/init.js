@@ -26,6 +26,7 @@ var campaigns = [],
 completedAds = [];
 var possibleOps = [],
 possibleClients = [];
+var saveFile = "";
 
 // check for saved games
 /* if (localStorage.getItem("save")){
@@ -53,7 +54,7 @@ var load = function(saveFile){
   possibleClients = saveFile.possibleClients
 }
 
-var save = function(){
+var save = function(saveFile){
   let saveFile = {};
   saveFile.msPerMin = msPerMin;
   saveFile.callFreq = callFreq;
@@ -70,5 +71,5 @@ var save = function(){
   saveFile.campaigns = campaigns;
   saveFile.possibleOps = possibleOps;
   saveFile.possibleClients = possibleClients;
-  localStorage.setItem("save", JSON.stringify(saveFile))
+  localStorage.setItem(saveFile, JSON.stringify(saveFile))
 }
