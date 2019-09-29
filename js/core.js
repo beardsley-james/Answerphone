@@ -289,6 +289,9 @@ var declineContract = function(clientId){
   lead.parentNode.removeChild(lead)
 }
 
-timer()
+//timer()
 
-revealPanel("callQueue")
+//revealPanel("callQueue")
+
+renderSaveGames();
+revealPanel("loadGame")

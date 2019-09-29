@@ -55,21 +55,22 @@ var load = function(saveFile){
 }
 
 var save = function(saveFile){
-  let saveFile = {};
-  saveFile.msPerMin = msPerMin;
-  saveFile.callFreq = callFreq;
-  saveFile.currentMinute = currentMinute;
-  saveFile.day = day;
-  saveFile.money = money;
-  saveFile.daysElapsed = daysElapsed;
-  saveFile.clientId = clientId;
-  saveFile.callNumber = callNumber;
-  saveFile.campaignId = campaignId;
-  saveFile.clients = clients;
-  saveFile.ops = ops;
-  saveFile.callQueue = callQueue;
-  saveFile.campaigns = campaigns;
-  saveFile.possibleOps = possibleOps;
-  saveFile.possibleClients = possibleClients;
-  localStorage.setItem(saveFile, JSON.stringify(saveFile))
+  let file = {};
+  file.time = new Date();
+  file.msPerMin = msPerMin;
+  file.callFreq = callFreq;
+  file.currentMinute = currentMinute;
+  file.day = day;
+  file.money = money;
+  file.daysElapsed = daysElapsed;
+  file.clientId = clientId;
+  file.callNumber = callNumber;
+  file.campaignId = campaignId;
+  file.clients = clients;
+  file.ops = ops;
+  file.callQueue = callQueue;
+  file.campaigns = campaigns;
+  file.possibleOps = possibleOps;
+  file.possibleClients = possibleClients;
+  localStorage.setItem(saveFile, JSON.stringify(file))
 }
