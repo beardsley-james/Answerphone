@@ -37,24 +37,31 @@ var saveFile = "";
 
 //load & save functions
 var load = function(saveFile){
-  msPerMin = saveFile.msPerMin;
-  callFreq = saveFile.callFreq;
-  currentMinute = saveFile.currentMinute;
-  day = saveFile.day;
-  money = saveFile.money;
-  daysElapsed = saveFile.daysElapsed;
-  clientId = saveFile.clientId;
-  callNumber = saveFile.callNumber;
-  campaignId = saveFile.campaignId;
-  clients = saveFile.clients;
-  ops = saveFile.ops;
-  callQueue = saveFile.callQueue;
-  campaigns = saveFile.campaigns;
-  possibleOps = saveFile.possibleOps;
-  possibleClients = saveFile.possibleClients
+  let file = JSON.parse(localStorage.getItem(saveFile));
+  msPerMin = file.msPerMin;
+  callFreq = file.callFreq;
+  currentMinute = file.currentMinute;
+  day = file.day;
+  money = file.money;
+  daysElapsed = file.daysElapsed;
+  clientId = file.clientId;
+  callNumber = file.callNumber;
+  campaignId = file.campaignId;
+  clients = file.clients;
+  ops = file.ops;
+  callQueue = file.callQueue;
+  campaigns = file.campaigns;
+  possibleOps = file.possibleOps;
+  possibleClients = file.possibleClients;
+  // need to render existing calls
+  // need to render pending op hires and client acquisitions
+  clientStartup();
+  opStartup();
+  timer();
+  revealPanel("callQueue")
 }
 
-var save = function(saveFile){
+var save = function(){
   let file = {};
   file.time = new Date();
   file.msPerMin = msPerMin;
@@ -72,5 +79,6 @@ var save = function(saveFile){
   file.campaigns = campaigns;
   file.possibleOps = possibleOps;
   file.possibleClients = possibleClients;
-  localStorage.setItem(saveFile, JSON.stringify(file))
+  localStorage.setItem(saveFile, JSON.stringify(file));
+  console.log("Game saved")
 }

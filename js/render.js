@@ -69,7 +69,7 @@ var opUpdater = function(op){
   }
 }
 
-var opStartup = function(ops){
+var opStartup = function(){
   // this needs to be wrapped in a new file called save.js that loads whatever into the DOM
   let opPool = document.getElementById("opPool");
   let operators = document.getElementById("operators");
@@ -181,7 +181,7 @@ var renderOpCard = function(op){
 
 // client functions
 
-var clientStartup = function(clients){
+var clientStartup = function(){
   // candidate for save.js
   let clientList = document.getElementById("clients");
   clients.forEach(function(client){

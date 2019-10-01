@@ -22,6 +22,9 @@ var timer = function(){
     disableUnaffordableButtons();
     checkAdvertisements();
     currentMinute++;
+    if (currentMinute % 60 == 0) {
+      save()
+    }
     if (currentMinute == minutesInDay){
       let report = endOfDay();
       renderEndOfDay(report);
