@@ -1,6 +1,3 @@
-opStartup(ops);
-clientStartup(clients);
-
 var phoneRinger = function(client){
   if (client.frequency <= callFreq && client.callVolume >= randomPercent()) {
     let call = new callGen(client);
@@ -194,7 +191,6 @@ var endOfDay = function(){
 
 var clearDay = function(){
   currentMinute = 0;
-  callFreq = 0;
   callQueue.completed = [];
   callQueue.lost = [];
   ops.forEach(function(op){
@@ -205,6 +201,9 @@ var clearDay = function(){
   clients.forEach(function(client){
     client.callTime = 0
   })
+  if (day == 6){
+    day = 0
+  } else {day++}
 }
 
 var disableUnaffordableButtons = function(){

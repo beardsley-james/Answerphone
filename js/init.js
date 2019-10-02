@@ -3,7 +3,7 @@
 var msPerMin = 1000,
 callFreq = 0,
 currentMinute = 0,
-day = "monday",
+day = 0,
 money = 0,
 daysElapsed = 0,
 autoTime = false;
@@ -36,8 +36,9 @@ var saveFile = "";
 
 
 //load & save functions
-var load = function(saveFile){
-  let file = JSON.parse(localStorage.getItem(saveFile));
+var load = function(saveFileName){
+  saveFile = saveFileName;
+  let file = JSON.parse(localStorage.getItem(saveFileName));
   msPerMin = file.msPerMin;
   callFreq = file.callFreq;
   currentMinute = file.currentMinute;
@@ -55,6 +56,7 @@ var load = function(saveFile){
   possibleClients = file.possibleClients;
   // need to render existing calls
   // need to render pending op hires and client acquisitions
+  document.getElementById("currentDay").innerHTML = daysOfTheWeek[day];
   clientStartup();
   opStartup();
   timer();

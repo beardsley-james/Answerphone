@@ -415,5 +415,6 @@ var endOfDayResetButton = function(){
   // move to core.js
   revealPanel("callQueue");
   document.getElementById("panelSelector").style.display = "inline";
-  timer()
+  timer();
+  document.getElementById("currentDay").innerHTML = daysOfTheWeek[day]
 }
