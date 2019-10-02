@@ -24,6 +24,15 @@ var callRender = function(call){
   return callTicket
 }
 
+var callStartup = function(){
+  callQueue.live.forEach(function(call){
+    document.getElementById("liveCalls").appendChild(callRender(call))
+  })
+  callQueue.holding.forEach(function(call){
+    document.getElementById("holdingCalls").appendChild(callRender(call))
+  })
+}
+
 var callRefresh = function(call){
   let callStats = document.getElementById("call" + call.callNumber + "stats");
   callStats.innerHTML = "Live:" + call.timeRinging + " Hold:" + call.timeOnHold + " Answer:" + call.callTime + " #:" + call.callNumber;
@@ -269,8 +278,7 @@ var updateAdvertisementCard = function(advertisement){
   } else { advertisementCardDuration.innerHTML = advertisement.duration }
 }
 
-var campaignCard = function(campaign){
-  // change to renderCampaignCard
+var renderCampaignCard = function(campaign){
   let card = document.createElement("li");
   card.setAttribute("id", campaign.id);
   card.setAttribute("class", "campaignCard");
@@ -297,6 +305,19 @@ var renderCampaignButton = function(campaign){
   button.innerHTML = campaign.name + moneyDisplay(campaign.cost);
   listItem.appendChild(button);
   return listItem
+}
+
+var adStartup = function(){
+  possibleOps.forEach(function(op){
+    document.getElementById("availableOps").appendChild(renderEmploymentApp(op))
+  })
+  possibleClients.forEach(function(client){
+    document.getElementById("availableClients").appendChild(renderSalesLead(client))
+  })
+  campaigns.forEach(function(campaign){
+    document.getElementById("activeCampaigns").appendChild(renderCampaignCard(campaign));
+    document.getElementById(campaign.code + "Ad").style.display = "none"
+  })
 }
 
 // save/load functions

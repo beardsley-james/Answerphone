@@ -54,8 +54,8 @@ var load = function(saveFileName){
   campaigns = file.campaigns;
   possibleOps = file.possibleOps;
   possibleClients = file.possibleClients;
-  // need to render existing calls
-  // need to render pending op hires and client acquisitions
+  callStartup();
+  adStartup();
   document.getElementById("currentDay").innerHTML = daysOfTheWeek[day];
   clientStartup();
   opStartup();

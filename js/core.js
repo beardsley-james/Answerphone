@@ -222,7 +222,7 @@ var startCampaign = function(campaignType){
   let campaign = new campaignGenerator(campaignType);
   campaigns.push(campaign);
   money -= campaign.cost;
-  document.getElementById("activeCampaigns").append(campaignCard(campaign));
+  document.getElementById("activeCampaigns").append(renderCampaignCard(campaign));
   document.getElementById(campaign.code + "Ad").style.display = "none"
 }
 
