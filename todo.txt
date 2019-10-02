@@ -2,7 +2,6 @@
 * Maybe some kind of animation so it doesn't look so jumpy
 * Why do the stupid op boxes flop around all over the place? Maybe fix that too
 * Get some more names
-* Set it up so it goes through days of the week
 * Holidays/bad weather days
 * Make operators work for certain amounts of time and pay them
 * Speed up time when there aren't calls coming in
@@ -15,6 +14,6 @@
 * Generate advertisement list dynamically based on what's in the database - in progress
 * Add an "unlocked" feature to the advertisement database for opening up upgrade paths
 * Add some comments/documentation and do an inventory of the different files line by line
-* fireOp, promoteOp, term985inateClient, and raiseRates functions need to be programmed
+* fireOp, promoteOp, terminateClient, and raiseRates functions need to be programmed
 * Consistent verbiage - too many different words for possible/potential clients, also need to clean up the verbiage for functions
 * Reconfigure generator functions to take a settings object as the argument and use that information to determine what kind of entity to produce
