@@ -22,6 +22,11 @@ var timer = function(){
     if (currentMinute % 60 == 0) {
       save()
     }
+    if (autoTime && callQueue.holding.length == 0 && callQueue.live.length == 0){
+      msPerMin = 10
+    } else if (autoTime) {
+      msPerMin = 500
+    }
     if (currentMinute == minutesInDay){
       let report = endOfDay();
       renderEndOfDay(report);
