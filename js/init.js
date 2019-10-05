@@ -84,3 +84,7 @@ var save = function(){
   localStorage.setItem(saveFile, JSON.stringify(file));
   console.log("Game saved")
 }
+
+var deleteSaveFile = function(saveFile){
+  localStorage.removeItem(saveFile)  
+}
