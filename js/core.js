@@ -1,5 +1,5 @@
 var phoneRinger = function(client){
-  if (client.frequency <= callFreq && client.callVolume >= randomPercent()) {
+  if ((client.frequency * callFreq) >= randomPercent()) {
     let call = new callGen(client);
     callQueue.live.push(call);
     document.getElementById("liveCalls").append(callRender(call))

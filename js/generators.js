@@ -15,7 +15,6 @@ var clientGenerator = function(difficulty){
   this.type = type;
   this.name = generateBusinessName(type);
   this.frequency = returnNumberInRange(callFreqRanges[type][0], callFreqRanges[type][1]);
-  this.callVolume = (difficulty * 5) + (Math.floor(Math.random() * 50));
   this.opLevel = determineOpLevel(difficulty);
   this.svcQual = Math.floor(Math.random() * 5) + 1;
   this.callRate = Math.floor(Math.random() * (100-50)) + 50;
