@@ -79,7 +79,18 @@ var names = {
     "Teddy",
     "Theodore",
     "Suraqah",
-    "Gema"
+    "Gema",
+    "Alysson",
+    "Juanita",
+    "Luzi",
+    "Lorraine",
+    "Una",
+    "Nora",
+    "Haadi",
+    "Mahesh",
+    "Dominick",
+    "Antoinette",
+    "Makil"
   ],
   last: [
     "Taylor",
@@ -173,6 +184,26 @@ var names = {
     "Gudino",
     "Maggiacomo",
     "Savles",
-    "MacGregor"
+    "MacGregor",
+    "Mlynarick",
+    "Browning",
+    "Blauvelt",
+    "Crockett",
+    "Russom",
+    "Osmani",
+    "Golenbock",
+    "Nethaway",
+    "LaSontano",
+    "Bouquin",
+    "Hakimi",
+    "Stubblebine",
+    "Diegelman",
+    "Pawar",
+    "Blumenthal",
+    "Hinshaw",
+    "Ayres",
+    "Little",
+    "Garagiola",
+    "Alexander"
   ]
 }
