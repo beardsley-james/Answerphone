@@ -27,7 +27,7 @@ var timer = function(){
     } else if (autoTime) {
       msPerMin = 500
     }
-    if (currentMinute == minutesInDay){
+    if (currentMinute >= minutesInDay){
       let report = endOfDay();
       renderEndOfDay(report);
       clearDay();
@@ -294,6 +294,45 @@ var declineContract = function(clientId){
   possibleClients.splice(i, 1);
   let lead = document.getElementById("lead" + clientId);
   lead.parentNode.removeChild(lead)
+}
+
+var fireOp = function(opInitials){
+  let i = ops.findIndex(function(op){
+    return op.name == opInitials
+  })
+  ops.splice(i, 1);
+  let queueCard = document.getElementById("queue" + opInitials);
+  let opCard = document.getElementById("op" + opInitials);
+  queueCard.parentNode.removeChild(queueCard);
+  opCard.parentNode.removeChild(opCard)
+}
+
+var promoteOp = function(opInitials){
+  let i = ops.findIndex(function(op){
+    return op.name == opInitials
+  })
+  ops[i].level++;
+  let opLevel = document.getElementById(opInitials + "level");
+  opLevel.innerHTML = ops[i].level;
+  let opQueueLevel = document.getElementById("queue" + opInitials + "name");
+  opQueueLevel.innerHTML = ops[i].level + " " + ops[i].name
+}
+
+var terminateClient = function(clientId){
+  let i = clients.findIndex(function(client){
+    return client.id == clientId
+  })
+  clients.splice(i, 1);
+  let clientCard = document.getElementById("client" + clientId);
+  clientCard.parentNode.removeChild(clientCard)
+}
+
+var raiseRates = function(clientId){
+  let i = clients.findIndex(function(client){
+    return client.id == clientId
+  })
+  clients[i].callRate += 10;
+  document.getElementById("rate" + clientId).innerHTML = moneyDisplay(clients[i].callRate)
 }
 
 //timer()

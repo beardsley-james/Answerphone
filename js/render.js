@@ -95,6 +95,7 @@ var renderOpStatus = function(op){
   opCard.setAttribute("class", "op");
   opCard.setAttribute("id", "queue" + op.name);
   let name = document.createElement("b");
+  name.setAttribute("id", "queue" + op.name + "name")
   name.innerHTML = op.level + " " + op.name;
   let status = document.createElement("span");
   status.setAttribute("id", "status" + op.name);
