@@ -52,3 +52,14 @@ var revealPanel = function(panelId){
     document.getElementById(panelId).style.display = "block"
   }
 }*/
+
+/* this function accepts a configuration object, all properties are optional
+  config = {
+    type = a string from businessTypes or an array of strings from businessTypes
+    frequency = an integer 1-10
+    opLevel = an integer 1-5
+    difficulty = an integer 1-10
+    svcQual = an integer 1-5
+    callRate = an integer greater than 0, represents cents per operator minutes
+  }
+*/
