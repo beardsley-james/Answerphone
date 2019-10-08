@@ -1,35 +1,99 @@
 var advertisingCampaigns = {
   "craigslist": {
     code: "craigslist",
-    name: "Craigslist Help Wanted",
-    duration: 180,
+    name: "Craigslist Help Wanted Advertisement",
+    duration: 1440,
     type: "hr",
     frequency: 1,
-    cost: 0
+    cost: 100,
+    recurringCost: 100,
+    config: {},
+    description: "Place a simple help wanted advertisement on a local message board",
+    enabled: true
   },
-  "tradeMagazine": {
-    code: "tradeMagazine",
-    name: "Trade Magazine Advertisement",
-    duration: 1440 * 30,
+  "hvacMagazine": {
+    code: "hvacMagazine",
+    name: "HVAC Magazine Advertisement",
+    description: "Place an advertisement in a trade magazine for HVAC workers and businessowners",
+    duration: 1440 * 7,
     type: "sales",
-    frequency: 3,
-    cost: 30000
+    frequency: 10,
+    config: {type: "hvac", difficulty: 5},
+    cost: 70000,
+    recurringCost: 0,
+    enabled: false
+  },
+  "doctorMagazine": {
+    code: "doctorMagazine",
+    name: "Medical Journal Advertisement",
+    description: "Place an advertisement in a trade magazine for medical professionals",
+    duration: 1440 * 7,
+    type: "sales",
+    frequency: 10,
+    config: {type: "doctor", difficulty: 5},
+    cost: 70000,
+    recurringCost: 0,
+    enabled: false
+  },
+  "lawyerMagazine": {
+    code: "lawyerMagazine",
+    name: "Law Journal Advertisement",
+    description: "Place an advertisement in a trade magazine for legal professionals",
+    duration: 1440 * 7,
+    type: "sales",
+    frequency: 10,
+    config: {type: "lawyer", difficulty: 5},
+    cost: 70000,
+    recurringCost: 0,
+    enabled: false
+  },
+  "newspaper": {
+    code: "newspaper",
+    name: "Newspaper Advertisement",
+    description: "Take out an ad in the local paper looking for clients",
+    duration: 1440,
+    type: "sales",
+    frequency: 5,
+    config: {difficulty: 3},
+    cost: 1000,
+    recurringCost: 1000,
+    enabled: true
+  },
+  "salesman": {
+    code: "salesman",
+    name: "In-House Salesman",
+    description: "Hire a salesperson to find you clients",
+    duration: 1440,
+    type: "sales",
+    frequency: 5,
+    config: {difficulty: 2},
+    cost: 48000,
+    recurringCost: 24000,
+    enabled: false
   },
   "perfect": {
     code: "perfect",
     name: "Perfect Advertisement",
-    duration: 1440 * 0.2,
+    description: "Debug Mode, 1 op/hr"
+    duration: 1440,
     type: "hr",
-    frequency: 1000,
-    cost: 0
+    config: {},
+    cost: 0,
+    recurringCost: 0,
+    frequency: 24,
+    enabled: false
   },
   "salesFiesta": {
     code: "salesFiesta",
     name: "Sales Fiesta",
-    duration: 100,
+    description: "Debug Mode, 1 client/hr"
+    duration: 1440,
     type: "sales",
-    frequency: 1000,
-    cost: 0
+    config: {},
+    frequency: 24,
+    cost: 0,
+    recurringCost: 0,
+    enabled: false
   }
 }
 
