@@ -59,6 +59,7 @@ var load = function(saveFileName){
   document.getElementById("currentDay").innerHTML = daysOfTheWeek[day];
   clientStartup();
   opStartup();
+  upgradesStartup();
   timer();
   revealPanel("callQueue")
 }
@@ -86,5 +87,5 @@ var save = function(){
 }
 
 var deleteSaveFile = function(saveFile){
-  localStorage.removeItem(saveFile)  
+  localStorage.removeItem(saveFile)
 }

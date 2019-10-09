@@ -74,7 +74,7 @@ var advertisingCampaigns = {
   "perfect": {
     code: "perfect",
     name: "Perfect Advertisement",
-    description: "Debug Mode, 1 op/hr"
+    description: "Debug Mode, 1 op/hr",
     duration: 1440,
     type: "hr",
     config: {},
@@ -86,7 +86,7 @@ var advertisingCampaigns = {
   "salesFiesta": {
     code: "salesFiesta",
     name: "Sales Fiesta",
-    description: "Debug Mode, 1 client/hr"
+    description: "Debug Mode, 1 client/hr",
     duration: 1440,
     type: "sales",
     config: {},
@@ -165,3 +165,86 @@ var dailyFreq = [
 ]
 
 var daysOfTheWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+
+var upgrades = [
+  {
+    name: "Speed Controls",
+    code: "speedControls",
+    type: "interface",
+    description: "Allow for more advanced speed control options",
+    cost: 30000,
+    enabled: false
+  },
+  {
+    name: "HVAC Trade Magazine Advertisements",
+    code: "hvacMagazine",
+    type: "advertisement",
+    description: "Open an advertising account with a professional HVAC magazine",
+    cost: 15000,
+    enabled: false
+  },
+  {
+    name: "Medical Journal Advertisements",
+    code: "doctorMagazine",
+    type: "advertisement",
+    description: "Open an advertising account with a medical journal publisher",
+    cost: 15000,
+    enabled: false
+  },
+  {
+    name: "Legal Journal Advertisements",
+    code: "lawyerMagazine",
+    type: "advertisement",
+    description: "Open an advertising account with a legal journal",
+    cost: 15000,
+    enabled: false
+  },
+  {
+    name: "Hire Sales Staff",
+    code: "salesman",
+    type: "advertisement",
+    description: "Open a sales department",
+    cost: 15000,
+    enabled: false
+  },
+  {
+    name: "Raise Service Rates",
+    code: "raiseRates",
+    type: "interface",
+    description: "Unlock the ability to raise rates for your clients",
+    cost: 10000,
+    enabled: false
+  },
+  {
+    name: "Hourly Call Tracking",
+    code: "hourlyTracking",
+    type: "interface",
+    description: "End of day reports will include an hour-by-hour breakdown of call activity",
+    cost: 20000,
+    enabled: false
+  },
+  {
+    name: "HVAC Specialization",
+    code: "hvacSpecialization",
+    type: "specialization",
+    description: "Specialize in servicing your HVAC clients",
+    cost: 30000,
+    enabled: false
+  },
+  {
+    name: "Medical Specialization",
+    code: "doctorSpecialization",
+    type: "specialization",
+    description: "Specialize in servicing your medical clients",
+    cost: 30000,
+    enabled: false
+  },
+  {
+    name: "Legal Specialization",
+    code: "lawyerSpecialization",
+    type: "specialization",
+    description: "Specialize in servicing your legal clients",
+    cost: 30000,
+    enabled: false
+  }
+]

@@ -303,12 +303,17 @@ var renderCampaignButton = function(campaign){
   let button = document.createElement("button");
   button.setAttribute("class", "expenditure dol" + campaign.cost);
   button.setAttribute("onclick", "startCampaign('" + campaign.code + "')");
-  button.innerHTML = campaign.name + moneyDisplay(campaign.cost);
+  button.innerHTML = campaign.name + " " + moneyDisplay(campaign.cost);
   listItem.appendChild(button);
   return listItem
 }
 
 var adStartup = function(){
+  for (var key in advertisingCampaigns) {
+    if (advertisingCampaigns[key].enabled){
+      document.getElementById("advertisingCampaignsMenu").appendChild(renderCampaignButton(advertisingCampaigns[key]))
+    }
+  }
   possibleOps.forEach(function(op){
     document.getElementById("availableOps").appendChild(renderEmploymentApp(op))
   })
@@ -439,4 +444,38 @@ var endOfDayResetButton = function(){
   document.getElementById("panelSelector").style.display = "inline";
   timer();
   document.getElementById("currentDay").innerHTML = daysOfTheWeek[day]
+}
+
+// upgrade functions
+
+var upgradesStartup = function(){
+  upgrades.forEach(function(upgrade){
+    if (!upgrade.enabled){
+      document.getElementById("upgrades").appendChild(renderUpgradeCard(upgrade))
+    }
+  })
+}
+
+var renderUpgradeCard = function(upgrade){
+  let card = document.createElement("div");
+  card.setAttribute("class", "upgradeCard");
+  card.setAttribute("id", upgrade.code + "Card");
+  let name = document.createElement("b");
+  name.innerHTML = upgrade.name;
+  let description = document.createElement("span");
+  description.innerHTML = upgrade.description;
+  let cost = document.createElement("span");
+  cost.innerHTML = moneyDisplay(upgrade.cost);
+  let button = document.createElement("button");
+  button.setAttribute("class", "expenditure dol" + upgrade.cost);
+  button.setAttribute("onclick", "purchaseUpgrade('" + upgrade.code + "')");
+  button.innerHTML = "Purchase Upgrade";
+  card.appendChild(name);
+  card.appendChild(lineBreak());
+  card.appendChild(description);
+  card.appendChild(lineBreak());
+  card.appendChild(cost);
+  card.appendChild(lineBreak());
+  card.appendChild(button);
+  return card
 }
