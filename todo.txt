@@ -14,3 +14,5 @@
 * Reconfigure generator functions to take a settings object as the argument and use that information to determine what kind of entity to produce
 * Implement a "firedOps" and "closedContracts" system to give you information on previous accounts and operators at the end of the day before clearing them as old business
 * Implement upgrade purchasing and displaying upgrades properly on app startup
+* Need a newGame function that does some start up stuff specifically adStartup which is otherwise included in the load function which doesn't fire for new games
+* Deleting a file should refresh the save game section to represent that it's gone and also should probably require a command prompt for verification
