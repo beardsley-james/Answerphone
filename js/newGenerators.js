@@ -57,3 +57,9 @@ var clientGenerator = function(config = {}){
 
   clientId++
 }
+
+// super easy hvac company
+{
+  type: "hvac",
+  difficulty: 1
+}
