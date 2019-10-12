@@ -1,7 +1,6 @@
 .panel{
   margin-left: 10%;
   margin-right: 10%;
-  margin-top: 3%;
   background-color: black;
   color: Chartreuse;
   border: 2px solid Gainsboro;
@@ -9,7 +8,12 @@
 }
 
 #controlPanel{
-  
+  margin-left: 10%;
+  margin-right:10%;
+  margin-top: 1em;
+  background-color: Gainsboro;
+  text-align: right;
+  height: 100%
 }
 
 .clear{
@@ -17,7 +21,7 @@
 }
 
 #liveCalls{
-  width: 20%;
+  width: 33%;
   border: 1px black solid;
   background-color: CornflowerBlue;
   float: left
@@ -28,7 +32,7 @@
 }
 
 #holdingCalls{
-  width: 20%;
+  width: 33%;
   border: 1px black solid;
   background-color: red;
   float: left
@@ -48,11 +52,11 @@
 }
 
 .callStatBox{
-  padding: 0.5%
+  padding: 0.5em
 }
 
 #opPool{
-  width: 50%;
+  width: 33%;
   border: 1px black solid;
   float: left
 }
@@ -65,18 +69,22 @@
 }
 
 .op{
+  color: black;
   border: 1px black solid;
   padding: 1%;
-  margin: 2%;
-  width: 40%;
-  float: left
+}
+
+.queue h2{
+  color: black
 }
 
 .active{
-  background-color: green
+  background-color: Chartreuse
 }
 
-.inactive{}
+.inactive{
+  background-color: white
+}
 
 .completingCall{
   background-color: CornFlowerBlue
@@ -87,15 +95,7 @@ h1{
 }
 
 #speedControls.button{
-  width:
-}
 
-.panel{
-  float: clear
-}
-
-.clientId{
-  text-align: right
 }
 
 body{
@@ -106,5 +106,9 @@ body{
 
 button {
   border-radius: 10%;
-  padding: 0.3em
+  padding: 0.5em
+}
+
+.upgrade {
+  display: none
 }
