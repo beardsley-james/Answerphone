@@ -248,3 +248,85 @@ var upgrades = [
     enabled: false
   }
 ]
+
+var experience = [
+  [
+    {
+      name: "Retail Salesperson",
+      code: "retail",
+      focus: 1,
+      personability: 4
+    },
+    {
+      name: "Telemarketer",
+      code: "telemarketer",
+      focus: 2,
+      personability: 3
+    },
+    {
+      name: "Teacher",
+      code: "teacher",
+      focus: 2,
+      personability: 3
+    },
+    {
+      name: "Factory Worker",
+      code: "factory",
+      focus: 4,
+      personability: 1
+    },
+    ,{
+      name: "Bureaucrat",
+      code: "bureaucrat",
+      focus: 3,
+      personability: 2
+    },
+    {
+      name: "Livery Driver",
+      code: "driver",
+      focus: 3,
+      personability: 2
+    }
+  ]
+]
+
+var backgrounds = [
+  [
+    {
+      name: "Prison",
+      code: "prison",
+      focus: 4,
+      personability: 1
+    },
+    {
+      name: "Student",
+      code: "student",
+      focus: 3,
+      personability: 2
+    },
+    {
+      name: "Hobbyist",
+      code: "hobby",
+      focus: 3,
+      personability: 2
+    },
+    {
+      name: "Homemaker",
+      code: "homemaker",
+      focus: 2,
+      personability: 3
+    },
+    {
+      name: "Personal Referral",
+      code: "referral",
+      focus: 2,
+      personability: 3
+    },
+    {
+      name: "Underachiever",
+      code: "underachiever",
+      focus: 4,
+      personability: 1
+    }
+  ]
+]
