@@ -132,13 +132,30 @@ var minToStandardTime = function(minutes){
   return timeString
 }
 
-var opGenerator = function(){
+var opGenerator = function({level = 1, payRate = 500} = {}) {
+
+  /* this function accepts a configuration object, all properties are optional
+    config = {
+      level = integer,
+      payRate = integer, in cents
+    } */
+
   this.name = initialsGenerator();
-  this.level = 1;
-  this.idleTime = 0;
-  this.focus = 5;
-  this.personability = 5;
+
+  this.level = level;
+
+  this.payRate = payRate;
+
+  this.experience = experience[level - 1][Math.floor(Math.random() * experience[level - 1].length)];
+
+  this.background = backgrounds[level - 1][Math.floor(Math.random() * backgrounds[level - 1].length)];
+
+  this.focus = this.experience.focus + this.background.focus;
+
+  this.personability = this.experience.personability + this.background.personability;
+
   this.call = [];
+  this.idleTime = 0;
   this.callsCompleted = 0
 }
 
