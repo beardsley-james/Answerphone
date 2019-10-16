@@ -1,6 +1,5 @@
 * Jiggle number values to make it actually fun
 * Maybe some kind of animation so it doesn't look so jumpy
-* Why do the stupid op boxes flop around all over the place? Maybe fix that too
 * Get some more names
 * Holidays/bad weather days
 * Make operators work for certain amounts of time and pay them

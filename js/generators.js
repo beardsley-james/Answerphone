@@ -1,14 +1,93 @@
-var generateFullName = function(){
-  return generateFirstName() + " " + generateLastName()
+// call functions
+
+var callCheck = function(frequency){
+  if (Math.floor(Math.random() * 100) > frequency){
+    return false
+  } else {
+    return true
+  }
 }
 
-var generateFirstName = function(){
-  return names.first[Math.floor(Math.random()*names.first.length)]
+var callGen = function(company){
+  this.name = generateFullName();
+  this.client = company.name;
+  this.type = company.type;
+  this.message = messages[company.type][Math.floor(Math.random()*messages[company.type].length)];
+  this.difficulty = company.opLevel + Math.floor(company.svcQual/2);
+  this.timeRinging = 0;
+  this.timeOnHold = 0;
+  this.callTime = 0;
+  this.dispatchTime = 0;
+  this.custSatisfaction = 0;
+  this.callNumber = callNumber;
+  this.rate = company.callRate;
+  callNumber++
 }
 
-var generateLastName = function(){
-  return names.last[Math.floor(Math.random()*names.last.length)]
+// operator functions
+
+var opGenerator = function({level = 1, payRate = 500} = {}) {
+
+  /* this function accepts a configuration object, all properties are optional
+    config = {
+      level = integer,
+      payRate = integer, in cents
+    } */
+
+  this.name = initialsGenerator();
+
+  this.level = level;
+
+  this.payRate = payRate;
+
+  this.experience = experience[level - 1][Math.floor(Math.random() * experience[level - 1].length)];
+
+  this.background = backgrounds[level - 1][Math.floor(Math.random() * backgrounds[level - 1].length)];
+
+  this.focus = this.experience.focus + this.background.focus;
+
+  this.personability = this.experience.personability + this.background.personability;
+
+  this.call = [];
+  this.idleTime = 0;
+  this.callsCompleted = 0
 }
+
+var initialsGenerator = function(){
+  let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  let initials = "";
+  while (initials.length < 3) {
+    initials += alphabet[Math.floor(Math.random() * alphabet.length)]
+  }
+  if (initialsChecker(initials)){
+    return initials
+  } else { return initialsGenerator() }
+}
+
+var initialsChecker = function(initials){
+  let same = 0;
+  ops.forEach(function(op){
+    if (op.name == initials){
+      same = 1
+    }
+  })
+  possibleOps.forEach(function(op){
+    if (op.name == initials){
+      same = 1
+    }
+  })
+  if (same == 0){
+    return true
+  } else { return false }
+}
+
+var determineOpLevel = function(difficulty){
+  if (difficulty > 6) {return 3}
+  else if (difficulty > 3) {return 2}
+  else {return 1}
+}
+
+// client functions
 
 var clientGenerator = function(config = {}){
 
@@ -70,123 +149,6 @@ var clientGenerator = function(config = {}){
   clientId++
 }
 
-var returnNumberInRange = function(min, max){
-  return Math.floor(Math.random() * (max - min) + min)
-}
-
-var determineOpLevel = function(difficulty){
-  if (difficulty > 6) {return 3}
-  else if (difficulty > 3) {return 2}
-  else {return 1}
-}
-
-var callCheck = function(frequency){
-  if (Math.floor(Math.random() * 100) > frequency){
-    return false
-  } else {
-    return true
-  }
-}
-
-var callGen = function(company){
-  this.name = generateFullName();
-  this.client = company.name;
-  this.type = company.type;
-  this.message = messages[company.type][Math.floor(Math.random()*messages[company.type].length)];
-  this.difficulty = company.opLevel + Math.floor(company.svcQual/2);
-  this.timeRinging = 0;
-  this.timeOnHold = 0;
-  this.callTime = 0;
-  this.dispatchTime = 0;
-  this.custSatisfaction = 0;
-  this.callNumber = callNumber;
-  this.rate = company.callRate;
-  callNumber++
-}
-
-var randomPercent = function(){
-  return Math.floor(Math.random() * 100) + 1
-}
-
-var minToMilTime = function(minutes){
-  return Math.floor(minutes/60) + "" + (minutes%60)
-}
-
-var minToStandardTime = function(minutes){
-  let hours = Math.floor(minutes/60);
-  let pm = 0;
-  if (hours > 12){
-    pm = 1;
-    hours = hours - 12
-  }
-  let mins = (minutes%60);
-  if (mins < 10) {
-    mins = "0" + mins
-  }
-  let timeString = hours + ":" + mins;
-  if (pm) {
-    timeString += "pm"
-  } else {
-    timeString += "am"
-  }
-  return timeString
-}
-
-var opGenerator = function({level = 1, payRate = 500} = {}) {
-
-  /* this function accepts a configuration object, all properties are optional
-    config = {
-      level = integer,
-      payRate = integer, in cents
-    } */
-
-  this.name = initialsGenerator();
-
-  this.level = level;
-
-  this.payRate = payRate;
-
-  this.experience = experience[level - 1][Math.floor(Math.random() * experience[level - 1].length)];
-
-  this.background = backgrounds[level - 1][Math.floor(Math.random() * backgrounds[level - 1].length)];
-
-  this.focus = this.experience.focus + this.background.focus;
-
-  this.personability = this.experience.personability + this.background.personability;
-
-  this.call = [];
-  this.idleTime = 0;
-  this.callsCompleted = 0
-}
-
-var initialsGenerator = function(){
-  let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  let initials = "";
-  while (initials.length < 3) {
-    initials += alphabet[Math.floor(Math.random() * alphabet.length)]
-  }
-  if (initialsChecker(initials)){
-    return initials
-  } else { return initialsGenerator() }
-}
-
-var initialsChecker = function(initials){
-  let same = 0;
-  ops.forEach(function(op){
-    if (op.name == initials){
-      same = 1
-    }
-  })
-  possibleOps.forEach(function(op){
-    if (op.name == initials){
-      same = 1
-    }
-  })
-  if (same == 0){
-    return true
-  } else { return false }
-}
-
 var generateBusinessName = function(type){
   let nameTemplate = businessNames[type][Math.floor(Math.random()*businessNames[type].length)];
   let name = "";
@@ -220,6 +182,8 @@ var businessNameChecker = function(name){
   } else { return false }
 }
 
+// advertising functions
+
 var campaignGenerator = function(campaignType){
   let campaign = advertisingCampaigns[campaignType];
   this.name = campaign.name;
@@ -230,4 +194,50 @@ var campaignGenerator = function(campaignType){
   this.id = "advertisement" + (campaignId);
   this.code = campaign.code;
   campaignId++
+}
+
+// utility functions
+
+var generateFullName = function(){
+  return generateFirstName() + " " + generateLastName()
+}
+
+var generateFirstName = function(){
+  return names.first[Math.floor(Math.random()*names.first.length)]
+}
+
+var generateLastName = function(){
+  return names.last[Math.floor(Math.random()*names.last.length)]
+}
+
+var returnNumberInRange = function(min, max){
+  return Math.floor(Math.random() * (max - min) + min)
+}
+
+var randomPercent = function(){
+  return Math.floor(Math.random() * 100) + 1
+}
+
+var minToMilTime = function(minutes){
+  return Math.floor(minutes/60) + "" + (minutes%60)
+}
+
+var minToStandardTime = function(minutes){
+  let hours = Math.floor(minutes/60);
+  let pm = 0;
+  if (hours > 12){
+    pm = 1;
+    hours = hours - 12
+  }
+  let mins = (minutes%60);
+  if (mins < 10) {
+    mins = "0" + mins
+  }
+  let timeString = hours + ":" + mins;
+  if (pm) {
+    timeString += "pm"
+  } else {
+    timeString += "am"
+  }
+  return timeString
 }
