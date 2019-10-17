@@ -1,3 +1,33 @@
+var purchaseUpgrade = function(upgradeCode){
+  let i = upgrades.findIndex(function(upgrade){
+    return upgrade.code == upgradeCode
+  })
+  upgrades[i].enabled = true;
+  money -= upgrades[i].cost;
+  purchasedUpgrades.push(upgradeCode);
+  console.log(upgrades[i].type);
+  if (upgrades[i].type == "interface"){
+    let items = Array.from(document.getElementsByClassName(upgradeCode));
+    items.forEach(function(item){
+      item.classList.remove("upgrade")
+    })
+  } else if (upgrades[i].type == "advertisement"){
+    console.log("Advertisement enabled, code " + upgrades[i].code);
+    advertisingCampaigns[upgradeCode].enabled = true;
+    document.getElementById("advertisingCampaignsMenu").appendChild(renderCampaignButton(advertisingCampaigns[upgradeCode]))
+  } else if (upgrades[i].type == "specialization"){
+    upgrades.forEach(function(upgrade){
+      if (upgrade.type == "specialization"){
+        let card = document.getElementById(upgrade.code + "Card");
+        card.parentNode.removeChild(card)
+      }
+    })
+  }
+  let card = document.getElementById(upgrades[i].code + "Card");
+  card.parentNode.removeChild(card);
+  document.getElementById("bigMoney").innerHTML = moneyDisplay(money);
+}
+
 var phoneRinger = function(client){
   if ((client.frequency * callFreq) >= randomPercent()) {
     let call = new callGen(client);
@@ -244,7 +274,7 @@ var checkAdvertisements = function(){
           possibleOps.push(new opGenerator());
           document.getElementById("availableOps").appendChild(renderEmploymentApp(possibleOps.slice(-1)[0]))
         } else if (campaign.type == "sales"){
-          possibleClients.push(new clientGenerator(3));
+          possibleClients.push(new clientGenerator(campaign.config));
           document.getElementById("availableClients").appendChild(renderSalesLead(possibleClients.slice(-1)[0]))
         }
       }

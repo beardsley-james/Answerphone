@@ -253,6 +253,10 @@ var renderClientCard = function(client){
   let raiseRatesButton = document.createElement("button");
   raiseRatesButton.setAttribute("onclick", "raiseRates('" + client.id + "')");
   raiseRatesButton.innerHTML = "Raise Rates";
+  if (purchasedUpgrades.indexOf("raiseRates")){
+    raiseRatesButton.classList.add("upgrade")
+  }
+  raiseRatesButton.classList.add("raiseRates");
   clientCard.appendChild(name);
   clientCard.appendChild(lineBreak());
   clientCard.appendChild(type);
@@ -449,9 +453,15 @@ var endOfDayResetButton = function(){
 // upgrade functions
 
 var upgradesStartup = function(){
+  purchasedUpgrades.forEach(function(upgradeCode){
+    let i = upgrades.findIndex(function(upgrade){return upgrade.code == upgradeCode});
+    upgrades[i].enabled = true
+  })
   upgrades.forEach(function(upgrade){
     if (!upgrade.enabled){
       document.getElementById("upgrades").appendChild(renderUpgradeCard(upgrade))
+    } else if (upgrade.type == "advertisement"){
+      advertisingCampaigns[upgrade.code].enabled = true
     }
   })
 }

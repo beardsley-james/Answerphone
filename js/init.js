@@ -26,6 +26,7 @@ var campaigns = [],
 completedAds = [];
 var possibleOps = [],
 possibleClients = [];
+var purchasedUpgrades = [];
 var saveFile = "";
 
 // check for saved games
@@ -54,6 +55,8 @@ var load = function(saveFileName){
   campaigns = file.campaigns;
   possibleOps = file.possibleOps;
   possibleClients = file.possibleClients;
+  purchasedUpgrades = file.purchasedUpgrades;
+  upgradesStartup();
   callStartup();
   adStartup();
   document.getElementById("currentDay").innerHTML = daysOfTheWeek[day];
@@ -82,6 +85,7 @@ var save = function(){
   file.campaigns = campaigns;
   file.possibleOps = possibleOps;
   file.possibleClients = possibleClients;
+  file.purchasedUpgrades = purchasedUpgrades;
   localStorage.setItem(saveFile, JSON.stringify(file));
   console.log("Game saved")
 }

@@ -227,6 +227,7 @@ var upgrades = [
     name: "HVAC Specialization",
     code: "hvacSpecialization",
     type: "specialization",
+    specialization: "hvac",
     description: "Specialize in servicing your HVAC clients",
     cost: 30000,
     enabled: false
@@ -235,6 +236,7 @@ var upgrades = [
     name: "Medical Specialization",
     code: "doctorSpecialization",
     type: "specialization",
+    specialization: "doctor",
     description: "Specialize in servicing your medical clients",
     cost: 30000,
     enabled: false
@@ -243,6 +245,7 @@ var upgrades = [
     name: "Legal Specialization",
     code: "lawyerSpecialization",
     type: "specialization",
+    specialization: "lawyer",
     description: "Specialize in servicing your legal clients",
     cost: 30000,
     enabled: false
@@ -275,7 +278,7 @@ var experience = [
       focus: 4,
       personability: 1
     },
-    ,{
+    {
       name: "Bureaucrat",
       code: "bureaucrat",
       focus: 3,
