@@ -90,7 +90,11 @@ var names = {
     "Mahesh",
     "Dominick",
     "Antoinette",
-    "Makil"
+    "Makil",
+    "Rudyard",
+    "Rosemarie",
+    "Angel",
+    "Thom"
   ],
   last: [
     "Taylor",
@@ -204,6 +208,10 @@ var names = {
     "Ayres",
     "Little",
     "Garagiola",
-    "Alexander"
+    "Alexander",
+    "Edick",
+    "Gulbrandsen",
+    "DeJesus",
+    "DeLeuw"
   ]
 }
