@@ -53,6 +53,19 @@ var revealPanel = function(panelId){
   }
 }*/
 
+/*
+
+clients.forEach(function(client){
+  if (client.name == op.call[0].client){
+    client.callTime += op.call[0].callTime;
+    if (client.satisfaction < 100){
+      client.satisfaction++
+    }
+  }
+})
+
+*/
+
 /* this function accepts a configuration object, all properties are optional
   config = {
     type = a string from businessTypes or an array of strings from businessTypes

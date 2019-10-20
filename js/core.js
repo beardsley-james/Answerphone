@@ -42,6 +42,7 @@ var timer = function(){
       callFreq = dailyFreq[day][currentMinute];
     }
     clients.forEach(phoneRinger);
+    clients.forEach(clientUpdater);
     ops.forEach(callChecker);
     callQueueAdvance();
     callStatBoxRefresh();
@@ -75,9 +76,14 @@ var callChecker = function(op){
       op.call[0].timeToComplete--;
     } else if (op.call[0].timeToComplete == 0) {
       delete op.call[0].timeToComplete;
+      increaseSatisfaction(op);
       clients.forEach(function(client){
         if (client.name == op.call[0].client){
-          client.callTime += op.call[0].callTime
+          client.callTime += op.call[0].callTime;
+          increaseSatisfaction(client);
+          if (op.call[0].timeOnHold < 3 && op.call[0].timeRinging < 1){
+            increaseSatisfaction(client)
+          }
         }
       })
       money += (op.call[0].callTime * op.call[0].rate);
@@ -95,6 +101,11 @@ var callChecker = function(op){
       callGrabber(callQueue.holding, op.call);
     } else {
       op.idleTime++;
+      op.idleTimer++;
+      if (op.idleTimer == 60){
+        op.idleTimer = 0;
+        decreaseSatisfaction(op)
+      }
     }
   }
   opUpdater(op)
@@ -130,7 +141,19 @@ var checkIfCallCompleted = function(op, call){
 var callQueueAdvance = function(){
   callQueue.holding.forEach(function(call){
     call.timeOnHold++;
+    if (call.timeOnHold == 3 || call.timeOnHold == 4){
+      clients.forEach(function(client){
+        if (client.name == call.client){
+          decreaseSatisfaction(client)
+        }
+      })
+    }
     if (call.timeOnHold > 5) {
+      clients.forEach(function(client){
+        if (client.name == call.client){
+          decreaseSatisfaction(client)
+        }
+      })
       var i = callQueue.holding.indexOf(call);
       callQueue.lost.push(callQueue.holding.splice(i, 1));
       removeCall(call);
@@ -139,6 +162,11 @@ var callQueueAdvance = function(){
   callQueue.live.forEach(function(call){
     call.timeRinging++;
     if (call.timeRinging > 3) {
+      clients.forEach(function(client){
+        if (client.name == call.client){
+          decreaseSatisfaction(client)
+        }
+      })
       var i = callQueue.live.indexOf(call);
       callQueue.lost.push(callQueue.live.splice(i, 1));
       removeCall(call);
@@ -170,7 +198,8 @@ var manualAnswer = function(event){
     callObj.callTime++;
     clients.forEach(function(client){
       if (client.name == callObj.client){
-        client.callTime += callObj.callTime
+        client.callTime += callObj.callTime;
+        increaseSatisfaction(client)
       }
     })
     money += (callObj.callTime * callObj.rate);
@@ -208,7 +237,12 @@ var endOfDay = function(){
       callsCompleted: op.callsCompleted,
       idleTime: op.idleTime
     };
-    report.ops.push(op)
+    report.ops.push(op);
+    if (op.satisfaction < 20){
+      if (op.satisfaction < randomPercent()){
+        fireOp(op.name)
+      }
+    }
   })
   clients.forEach(function(client){
     report.amountEarned += (client.callRate * client.callTime);
@@ -219,7 +253,16 @@ var endOfDay = function(){
       callRate: client.callRate,
       callTime: client.callTime
     }
-    report.clients.push(client)
+    report.clients.push(client);
+    client.satisfaction += 10;
+    if (client.satisfaction > 100){
+      client.satisfaction = 100
+    }
+    if (client.satisfaction < 30){
+      if (client.satisfaction < randomPercent()){
+        terminateClient(client.id)
+      }
+    }
   })
   return report
 }
@@ -361,8 +404,28 @@ var raiseRates = function(clientId){
   let i = clients.findIndex(function(client){
     return client.id == clientId
   })
-  clients[i].callRate += 10;
-  document.getElementById("rate" + clientId).innerHTML = moneyDisplay(clients[i].callRate)
+  client.satisfaction -= 10;
+  if (client.satisfaction < 0){
+    client.satisfaction = 0
+  }
+  if (client.satisfaction < randomPercent()){
+    terminateClient(client.name)
+  } else {
+    clients[i].callRate += 10;
+    document.getElementById("rate" + clientId).innerHTML = moneyDisplay(clients[i].callRate)
+  }
+}
+
+var increaseSatisfaction = function(entity){
+  if (entity.satisfaction < 100){
+    entity.satisfaction++
+  }
+}
+
+var decreaseSatisfaction = function(entity){
+  if (entity.satisfaction > 0){
+    entity.satisfaction--
+  }
 }
 
 //timer()

@@ -76,6 +76,7 @@ var opUpdater = function(op){
     status.innerHTML = "Standby";
     opCard.setAttribute("class", "op inactive")
   }
+  document.getElementById(op.name + "Satisfaction").innerHTML = op.satisfaction
 }
 
 var opStartup = function(){
@@ -148,13 +149,19 @@ var renderOpCard = function(op){
   let wageValue = document.createElement("span");
   wageValue.setAttribute("id", op.name + "wage");
   //wageValue.innerHTML = moneyDisplay(op.wage);
-  wageValue.innerHTML = "$0";
+  wageValue.innerHTML = moneyDisplay(op.payRate);
   wage.appendChild(wageValue);
   let averageCallTime = document.createElement("span");
   averageCallTime.innerHTML = "Average call time: ";
   let averageCallTimeValue = document.createElement("span");
   averageCallTime.setAttribute("id", op.name + "calltime");
   averageCallTime.appendChild(averageCallTimeValue);
+  let satisfaction = document.createElement("span");
+  satisfaction.innerHTML = "Satisfaction: ";
+  let satisfactionValue = document.createElement("span");
+  satisfactionValue.innerHTML = op.satisfaction;
+  satisfactionValue.setAttribute("id", op.name + "Satisfaction");
+  satisfaction.appendChild(satisfactionValue);
   let focus = document.createElement("span");
   focus.innerHTML = "Focus: ";
   let focusValue = document.createElement("span");
@@ -180,7 +187,9 @@ var renderOpCard = function(op){
   opCard.appendChild(wage);
   opCard.appendChild(lineBreak())
   opCard.appendChild(averageCallTime);
-  opCard.appendChild(lineBreak())
+  opCard.appendChild(lineBreak());
+  opCard.appendChild(satisfaction);
+  opCard.appendChild(lineBreak());
   opCard.appendChild(focus);
   opCard.appendChild(personability);
   opCard.appendChild(lineBreak())
@@ -247,6 +256,12 @@ var renderClientCard = function(client){
   rateValue.setAttribute("id", "rate" + client.id);
   rateValue.innerHTML = moneyDisplay(client.callRate);
   rate.appendChild(rateValue);
+  let satisfaction = document.createElement("span");
+  satisfaction.innerHTML = "Satisfaction: ";
+  let satisfactionValue = document.createElement("span");
+  satisfactionValue.innerHTML = client.satisfaction;
+  satisfactionValue.setAttribute("id", "satisfaction" + client.id);
+  satisfaction.appendChild(satisfactionValue);
   let terminateButton = document.createElement("button");
   terminateButton.setAttribute("onclick", "terminateClient('" + client.id + "')");
   terminateButton.innerHTML = "Terminate Contract";
@@ -267,9 +282,15 @@ var renderClientCard = function(client){
   clientCard.appendChild(lineBreak());
   clientCard.appendChild(rate);
   clientCard.appendChild(lineBreak());
+  clientCard.appendChild(satisfaction);
+  clientCard.appendChild(lineBreak());
   clientCard.appendChild(terminateButton);
   clientCard.appendChild(raiseRatesButton);
   return clientCard
+}
+
+var clientUpdater = function(client){
+  document.getElementById("satisfaction" + client.id).innerHTML = client.satisfaction
 }
 
 // advertisement functions

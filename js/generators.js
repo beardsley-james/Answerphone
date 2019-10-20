@@ -50,7 +50,9 @@ var opGenerator = function({level = 1, payRate = 500} = {}) {
 
   this.call = [];
   this.idleTime = 0;
-  this.callsCompleted = 0
+  this.callsCompleted = 0;
+  this.satisfaction = 50;
+  this.idleTimer = 0
 }
 
 var initialsGenerator = function(){
@@ -145,6 +147,8 @@ var clientGenerator = function(config = {}){
   this.callTime = 0;
 
   this.id = clientId;
+
+  this.satisfaction = 50;
 
   clientId++
 }
