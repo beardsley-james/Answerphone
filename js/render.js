@@ -358,18 +358,27 @@ var renderSaveGames = function(saveGame){
     if (localStorage.getItem("save" + i)){
       let saveCard = document.getElementById("saveFile" + i);
       let saveFile = JSON.parse(localStorage.getItem("save" + i));
-      let saveButton = document.getElementById("saveButton" + i);
+      let saveButton = document.createElement("button");
+      saveButton.setAttribute("id", "saveFile" + i);
       saveButton.setAttribute("onclick", "load('save" + i + "')");
       saveButton.innerHTML = "Load Game";
       let deleteButton = document.createElement("button");
       deleteButton.setAttribute("onclick", "deleteSaveFile('save" + i + "')");
       deleteButton.innerHTML = "Delete Save";
+      saveCard.appendChild(saveButton);
       saveCard.appendChild(deleteButton);
       saveCard.appendChild(lineBreak());
       let date = document.createElement("span");
       saveTime = new Date(saveFile.time);
       date.innerHTML = saveTime.toLocaleTimeString() + " " + saveTime.toDateString();
       saveCard.appendChild(date)
+    } else {
+      let saveCard = document.getElementById("saveFile" + i);
+      let newGameButton = document.createElement("button");
+      newGameButton.setAttribute("id", "saveFile" + i);
+      newGameButton.setAttribute("onclick", "newGame('save" + i + "')");
+      newGameButton.innerHTML = "New Game";
+      saveCard.appendChild(newGameButton)
     }
   }
 }

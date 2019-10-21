@@ -62,7 +62,6 @@ var load = function(saveFileName){
   document.getElementById("currentDay").innerHTML = daysOfTheWeek[day];
   clientStartup();
   opStartup();
-  upgradesStartup();
   timer();
   revealPanel("callQueue")
 }
@@ -88,6 +87,15 @@ var save = function(){
   file.purchasedUpgrades = purchasedUpgrades;
   localStorage.setItem(saveFile, JSON.stringify(file));
   console.log("Game saved")
+}
+
+var newGame = function(saveFileName){
+  upgradesStartup();
+  adStartup();
+  document.getElementById("currentDay").innerHTML = daysOfTheWeek[day];
+  timer();
+  revealPanel("callQueue");
+  saveFile = saveFileName
 }
 
 var deleteSaveFile = function(saveFile){
