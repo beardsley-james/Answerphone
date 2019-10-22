@@ -89,6 +89,33 @@ var determineOpLevel = function(difficulty){
   else {return 1}
 }
 
+var workWeekGenerator = function(){
+  let weekdays = [0, 1, 2, 3, 4];
+  let dayOff = Math.floor(Math.random() * 5);
+  weekdays.splice(dayOff, 1);
+  weekdays.push(Math.floor(Math.random() * 2) + 5);
+  return weekdays
+}
+
+var hoursGenerator = function(){
+  let shifts = [1350, 390, 870, 1350];
+  let shift = Math.floor(Math.random() * 3);
+  let startShift = (Math.floor(Math.random() * 6) * 30);
+  let endShift = (Math.floor(Math.random() * 6) * 30);
+  let startTime = (shifts[shift] + startShift);
+  let endTime = (shifts[shift+1] + endShift);
+  let schedule = [startTime, endTime];
+  schedule.forEach(function(time){
+    if (time > 1339){
+      time -= 1440
+    }
+  })
+  let shiftLength = ((startTime + endTime) - 1440);
+  console.log(minToStandardTime(startTime) + " to " + minToStandardTime(endTime))
+  console.log(minToStandardTime(shiftLength));
+  return schedule;
+}
+
 // client functions
 
 var clientGenerator = function(config = {}){
