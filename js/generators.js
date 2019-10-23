@@ -26,12 +26,13 @@ var callGen = function(company){
 
 // operator functions
 
-var opGenerator = function({level = 1, payRate = 500} = {}) {
+var opGenerator = function({level = 1, payRate = 500, shift = Math.floor(Math.random() * 3)} = {}) {
 
   /* this function accepts a configuration object, all properties are optional
     config = {
       level = integer,
-      payRate = integer, in cents
+      payRate = integer, in cents,
+      shift = integer, 0: overnight, 1: morning, 2: evening
     } */
 
   this.name = initialsGenerator();
@@ -47,6 +48,10 @@ var opGenerator = function({level = 1, payRate = 500} = {}) {
   this.focus = this.experience.focus + this.background.focus;
 
   this.personability = this.experience.personability + this.background.personability;
+
+  this.shift = hoursGenerator(shift);
+
+  this.schedule = workWeekGenerator();
 
   this.call = [];
   this.idleTime = 0;
@@ -97,22 +102,20 @@ var workWeekGenerator = function(){
   return weekdays
 }
 
-var hoursGenerator = function(){
+var hoursGenerator = function(shift = Math.floor(Math.random() * 3)){
   let shifts = [1350, 390, 870, 1350];
-  let shift = Math.floor(Math.random() * 3);
   let startShift = (Math.floor(Math.random() * 6) * 30);
   let endShift = (Math.floor(Math.random() * 6) * 30);
   let startTime = (shifts[shift] + startShift);
   let endTime = (shifts[shift+1] + endShift);
   let schedule = [startTime, endTime];
-  schedule.forEach(function(time){
-    if (time > 1339){
-      time -= 1440
+  schedule.forEach(function(time, i){
+    if (time > 1439){
+      schedule[i] = time - 1440
     }
   })
   let shiftLength = ((startTime + endTime) - 1440);
-  console.log(minToStandardTime(startTime) + " to " + minToStandardTime(endTime))
-  console.log(minToStandardTime(shiftLength));
+
   return schedule;
 }
 
@@ -259,6 +262,9 @@ var minToStandardTime = function(minutes){
   if (hours > 12){
     pm = 1;
     hours = hours - 12
+  }
+  if (hours == 0){
+    hours = 12
   }
   let mins = (minutes%60);
   if (mins < 10) {
