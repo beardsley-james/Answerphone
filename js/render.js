@@ -127,6 +127,8 @@ var renderEmploymentApp = function(op){
   app.appendChild(lineBreak());
   app.appendChild(stats);
   app.appendChild(lineBreak());
+  app.appendChild(renderSchedule(op.shift, op.schedule));
+  app.appendChild(lineBreak());
   app.appendChild(hireButton);
   app.appendChild(declineButton);
   return app
@@ -192,10 +194,28 @@ var renderOpCard = function(op){
   opCard.appendChild(lineBreak());
   opCard.appendChild(focus);
   opCard.appendChild(personability);
-  opCard.appendChild(lineBreak())
+  opCard.appendChild(lineBreak());
+  opCard.appendChild(renderSchedule(op.shift, op.schedule));
+  opCard.appendChild(lineBreak());
   opCard.appendChild(fireButton);
   opCard.appendChild(promoteButton);
   return opCard
+}
+
+var renderSchedule = function(shift, days){
+  let workWeek = document.createElement("span");
+  let workWeekArray = [];
+  days.forEach(function(day){
+    workWeekArray.push(daysOfTheWeek[day])
+  })
+  workWeek.innerHTML = workWeekArray.join(", ");
+  let shiftTimes = document.createElement("span");
+  shiftTimes.innerHTML = minToStandardTime(shift[0]) + " to " + minToStandardTime(shift[1]);
+  let returnElement = document.createElement("span");
+  returnElement.appendChild(workWeek);
+  returnElement.appendChild(lineBreak());
+  returnElement.appendChild(shiftTimes);
+  return returnElement
 }
 
 // client functions
