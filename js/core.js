@@ -68,45 +68,56 @@ var timer = function(){
 }
 
 var callChecker = function(op){
-  if (op.call.length > 0){
-    if (op.call[0].timeOnHold == 0 && op.call[0].callTime == 0 && callQueue.live.length > 0){
-      callGrabber(op.call, callQueue.holding);
-      callGrabber(callQueue.live, op.call);
-    } else if (op.call[0].timeToComplete > 0){
-      op.call[0].timeToComplete--;
-    } else if (op.call[0].timeToComplete == 0) {
-      delete op.call[0].timeToComplete;
-      increaseSatisfaction(op);
-      clients.forEach(function(client){
-        if (client.name == op.call[0].client){
-          client.callTime += op.call[0].callTime;
-          increaseSatisfaction(client);
-          if (op.call[0].timeOnHold < 3 && op.call[0].timeRinging < 1){
-            increaseSatisfaction(client)
+  console.log(currentMinute + " " + op.shift[0] + " " + day + " " + op.schedule.includes(day))
+  if (currentMinute == op.shift[0] && op.schedule.includes(day)){
+    punchIn(op);
+    console.log(op.name + " punched in");
+  } else if (currentMinute == op.shift[1] && op.working){
+    punchOut(op);
+    console.log(op.name + " punched out");
+  }
+  if (op.working){
+    if (op.call.length > 0){
+      if (op.call[0].timeOnHold == 0 && op.call[0].callTime == 0 && callQueue.live.length > 0){
+        callGrabber(op.call, callQueue.holding);
+        callGrabber(callQueue.live, op.call);
+      } else if (op.call[0].timeToComplete > 0){
+        op.call[0].timeToComplete--;
+      } else if (op.call[0].timeToComplete == 0) {
+        delete op.call[0].timeToComplete;
+        increaseSatisfaction(op);
+        clients.forEach(function(client){
+          if (client.name == op.call[0].client){
+            client.callTime += op.call[0].callTime;
+            increaseSatisfaction(client);
+            if (op.call[0].timeOnHold < 3 && op.call[0].timeRinging < 1){
+              increaseSatisfaction(client)
+            }
           }
+        })
+        money += (op.call[0].callTime * op.call[0].rate);
+        document.getElementById("bigMoney").innerHTML = moneyDisplay(money);
+        callGrabber(op.call, callQueue.completed);
+        op.callsCompleted++;
+      } else {
+        op.call[0].callTime++;
+        checkIfCallCompleted(op, op.call[0])
+      }
+    } else {
+      if (callQueue.live.length > 0){
+        callGrabber(callQueue.live, op.call);
+      } else if (callQueue.holding.length > 0){
+        callGrabber(callQueue.holding, op.call);
+      } else {
+        op.idleTime++;
+        op.idleTimer++;
+        if (op.idleTimer == 60){
+          op.idleTimer = 0;
+          decreaseSatisfaction(op)
         }
-      })
-      money += (op.call[0].callTime * op.call[0].rate);
-      document.getElementById("bigMoney").innerHTML = moneyDisplay(money);
-      callGrabber(op.call, callQueue.completed);
-      op.callsCompleted++;
-    } else {
-      op.call[0].callTime++;
-      checkIfCallCompleted(op, op.call[0])
-    }
-  } else {
-    if (callQueue.live.length > 0){
-      callGrabber(callQueue.live, op.call);
-    } else if (callQueue.holding.length > 0){
-      callGrabber(callQueue.holding, op.call);
-    } else {
-      op.idleTime++;
-      op.idleTimer++;
-      if (op.idleTimer == 60){
-        op.idleTimer = 0;
-        decreaseSatisfaction(op)
       }
     }
+    op.timeWorked++
   }
   opUpdater(op)
 }
@@ -427,6 +438,19 @@ var decreaseSatisfaction = function(entity){
     entity.satisfaction--
   }
 }
+
+var punchIn = function(op){
+  op.working = true;
+  document.getElementById("opPool").appendChild(renderOpStatus(op))
+}
+
+var punchOut = function(op){
+  op.working = false;
+  let card = document.getElementById("queue" + op.name);
+  card.parentNode.removeChild(card)
+}
+
+
 
 //timer()
 

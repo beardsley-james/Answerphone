@@ -63,18 +63,20 @@ var removeCall = function(call){
 var opUpdater = function(op){
   // need to add other conditions in here so that you can tell what else the op is doing
   let status = document.getElementById("status" + op.name);
-  let opCard = document.getElementById("queue" + op.name);
-  if (op.call.length > 0) {
-    if (op.call[0].timeToComplete > -1) {
-      status.innerHTML = op.call[0].name + ", " + op.call[0].client;
-      opCard.setAttribute("class", "op completingCall")
+  if (op.working){
+    let opCard = document.getElementById("queue" + op.name);
+    if (op.call.length > 0) {
+      if (op.call[0].timeToComplete > -1) {
+        status.innerHTML = op.call[0].name + ", " + op.call[0].client;
+        opCard.setAttribute("class", "op completingCall")
+      } else {
+        status.innerHTML = op.call[0].name + ", " + op.call[0].client;
+        opCard.setAttribute("class", "op active")
+      }
     } else {
-      status.innerHTML = op.call[0].name + ", " + op.call[0].client;
-      opCard.setAttribute("class", "op active")
+      status.innerHTML = "Standby";
+      opCard.setAttribute("class", "op inactive")
     }
-  } else {
-    status.innerHTML = "Standby";
-    opCard.setAttribute("class", "op inactive")
   }
   document.getElementById(op.name + "Satisfaction").innerHTML = op.satisfaction
 }

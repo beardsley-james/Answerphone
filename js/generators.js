@@ -55,6 +55,8 @@ var opGenerator = function({level = 1, payRate = 500, shift = Math.floor(Math.ra
 
   this.call = [];
   this.idleTime = 0;
+  this.timeWorked = 0;
+  this.working = false;
   this.callsCompleted = 0;
   this.satisfaction = 50;
   this.idleTimer = 0
