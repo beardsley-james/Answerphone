@@ -295,6 +295,29 @@ var clearDay = function(){
   } else {day++}
 }
 
+var endOfWeek = function(){
+  ops.forEach(function(op){
+    let minutesWorked = op.timeWorked;
+    let fifteensWorked = minutesWorked / 15;
+    let fifteenWage = op.payRate/4;
+    let paycheck = fifteensWorked * fifteenWage;
+    if (paycheck > money){
+      money = 0;
+      fireOp(op.name)
+    } else {
+      money -= paycheck;
+      op.satisfaction += 20;
+      if (op.satisfaction > 100){
+        op.satisfaction = 100
+      }
+      if (op.satisfaction < randomPercent()){
+        fireOp(op.name)
+      }
+    }
+    op.timeWorked = 0
+  })
+}
+
 var disableUnaffordableButtons = function(){
   let buttons = document.getElementsByClassName("expenditure");
   let buttonRegEx = /dol(\d+)/;
