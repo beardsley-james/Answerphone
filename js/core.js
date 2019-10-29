@@ -291,7 +291,7 @@ var clearDay = function(){
     client.callTime = 0
   })
   if (day == 6){
-    day = 0
+    endOfWeek()
   } else {day++}
 }
 
@@ -316,6 +316,7 @@ var endOfWeek = function(){
     }
     op.timeWorked = 0
   })
+  day = 0
 }
 
 var disableUnaffordableButtons = function(){
