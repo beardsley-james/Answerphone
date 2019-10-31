@@ -2,10 +2,8 @@
 * Maybe some kind of animation so it doesn't look so jumpy
 * Get some more names
 * Holidays/bad weather days
-* Make operators work for certain amounts of time and pay them
 * Implement backgrounds/experience and focus/personability, make sure they effect some of the game options
 * Set up an upgrade tree and gate certain kinds of information/options behind that tree, but also have a debug option to activate everything and give you a bunch of money - in progress
-* Client satisfaction levels based on lost calls and quality of service
 * Switch out the callGrabber function to work with indexes instead of just "pop"
 * Organize functions and variables a bit better.
 * Add some comments/documentation and do an inventory of the different files line by line

@@ -95,6 +95,9 @@ var newGame = function(saveFileName){
   document.getElementById("currentDay").innerHTML = daysOfTheWeek[day];
   timer();
   revealPanel("callQueue");
+  let client = new clientGenerator();
+  possibleClients.push(client);
+  acceptContract(client.id);
   saveFile = saveFileName
 }
 

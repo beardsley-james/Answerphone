@@ -4,7 +4,7 @@ var advertisingCampaigns = {
     name: "Craigslist Help Wanted Advertisement",
     duration: 1440,
     type: "hr",
-    frequency: 1,
+    frequency: 6,
     cost: 100,
     recurringCost: 100,
     config: {},
